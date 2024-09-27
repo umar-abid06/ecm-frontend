@@ -2,12 +2,15 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import AppRoutes from "./routes";
+import ApiClientProvider from "./context/ApiClientProvider";
 
 function App() {
   return (
-    <Router>
-      <AppRoutes />
-    </Router>
+    <ApiClientProvider>
+      <Router>
+        <AppRoutes />
+      </Router>
+    </ApiClientProvider>
   );
 }
 
