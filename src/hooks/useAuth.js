@@ -5,7 +5,7 @@ import { requestApi } from "../api/requestApi";
 import { ENDPOINTS } from "../api/endpoints";
 
 const useAuth = () => {
-  const { isAuth, setUserAuthentication } = useAuthStore();
+  const { setUserAuthentication } = useAuthStore();
 
   const login = async (credentials) => {
     try {
@@ -20,21 +20,21 @@ const useAuth = () => {
     setUserAuthentication(false);
   };
 
-  useEffect(() => {
-    // Validate token on component mount and set auth state accordingly
-    const validateToken = async () => {
-      try {
-        const data = await requestApi(ENDPOINTS.USER_PROFILE, "get");
-        setUserAuthentication(true, data);
-      } catch (error) {
-        logout();
-      }
-    };
+  // useEffect(() => {
+  //   // Validate token on component mount and set auth state accordingly
+  //   const validateToken = async () => {
+  //     try {
+  //       const data = await requestApi(ENDPOINTS.USER_PROFILE, "get");
+  //       setUserAuthentication(true, data);
+  //     } catch (error) {
+  //       logout();
+  //     }
+  //   };
 
-    if (isAuth) validateToken();
-  }, [isAuth]);
+  //   if (isAuth) validateToken();
+  // }, [isAuth]);
 
-  return { isAuth, login, logout };
+  return { login, logout };
 };
 
 export default useAuth;

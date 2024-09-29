@@ -4,7 +4,7 @@ import { getItem, setItem, clearAllData } from "../utils/storageService";
 import { ENDPOINTS } from "./endpoints";
 import { queryClient } from "../context/ApiClientProvider"; // Importing React Query client for state management
 
-const BASE_URL = "https://api.example.com"; // Replace with your actual base URL or environment variable
+const BASE_URL = import.meta.env.VITE_BASE_URL; // Replace with your actual base URL or environment variable
 
 // Create an ApiSauce client instance
 const apiClient = create({
