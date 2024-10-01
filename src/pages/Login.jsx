@@ -1,60 +1,86 @@
-// src/components/Login.js
+// src/components/MyForm.js
+
 import React, { useState } from "react";
-import useAuth from "../hooks/useAuth"; // Import your useAuth hook
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginValidationSchema } from "../utils/validationSchema.js";
+import InputField from "../components/input-field/InputField.jsx"; // Reusable InputField component
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Icons for password visibility
+import useAuth from "../hooks/useAuth.js";
+import { FaEnvelope, FaLock } from "react-icons/fa";
 
-const Login = () => {
-  const { login } = useAuth(); // Use the login function from the useAuth hook
-  const [credentials, setCredentials] = useState({
-    email: "",
-    password: "",
+function Login() {
+  const { login } = useAuth();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(loginValidationSchema), // Apply Yup validation schema
+    mode: "onBlur",
   });
-  const [error, setError] = useState(null);
 
-  // Handle input changes
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setCredentials((prev) => ({ ...prev, [name]: value }));
-  };
+  const [showPassword, setShowPassword] = useState(false); // Toggle password visibility
 
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(null); // Reset error state
-
+  const onSubmit = async (data) => {
+    console.log("Login Data:", data); // Handle login submission
     try {
       // Call the login function from the useAuth hook with credentials
-      await login(credentials);
+      await login(data);
     } catch (err) {
-      setError("Login failed. Please check your credentials.");
       console.error("Login error:", err);
     }
   };
 
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const passwordIcons = {
+    start: { icon: <FaLock className="text-gray-400" /> },
+    end: {
+      icon: !showPassword ? <FaEyeSlash /> : <FaEye />,
+      onClick: handleTogglePasswordVisibility,
+    },
+  };
+
   return (
-    <div>
-      <h1>Login</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={credentials.email}
-          onChange={handleInputChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={credentials.password}
-          onChange={handleInputChange}
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
-    </div>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="p-4 w-full max-w-sm mx-auto bg-white rounded-md shadow-md"
+    >
+      {/* Email Input */}
+      <InputField
+        name="email"
+        control={control}
+        placeholder="Enter your email"
+        error={errors.email?.message}
+        icons={{
+          start: { icon: <FaEnvelope className="text-gray-400" /> },
+        }}
+        className="mb-4"
+      />
+
+      {/* Password Input */}
+      <InputField
+        name="password"
+        control={control}
+        placeholder="Enter your password"
+        type={showPassword ? "text" : "password"}
+        error={errors.password?.message}
+        icons={passwordIcons}
+        className="mb-4"
+      />
+
+      {/* Submit Button */}
+      <button
+        type="submit"
+        className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md transition duration-200"
+      >
+        Login
+      </button>
+    </form>
   );
-};
+}
 
 export default Login;
