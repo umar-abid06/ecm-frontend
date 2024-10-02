@@ -9,8 +9,9 @@ const useAuth = () => {
 
   const login = async (credentials) => {
     try {
-      const data = await requestApi(ENDPOINTS.LOGIN, "post", credentials);
-      setUserAuthentication(true, data); // Save token in Zustand and local storage
+      const response = await requestApi(ENDPOINTS.LOGIN, "post", credentials);
+      console.log("Response in useAuth", response);
+      setUserAuthentication(true, response); // Save token in Zustand and local storage
     } catch (error) {
       console.error("Login failed:", error);
     }
@@ -18,6 +19,24 @@ const useAuth = () => {
 
   const logout = () => {
     setUserAuthentication(false);
+  };
+
+  // Register function (newly added)
+  const register = async (credentials) => {
+    try {
+      // Make the API request to register the user
+      const response = await requestApi(
+        ENDPOINTS.REGISTER,
+        "post",
+        credentials
+      );
+      // console.log("Regis Authform", response);
+
+      return response;
+    } catch (error) {
+      console.error("Registration error:", error);
+      return error;
+    }
   };
 
   // useEffect(() => {
@@ -34,7 +53,7 @@ const useAuth = () => {
   //   if (isAuth) validateToken();
   // }, [isAuth]);
 
-  return { login, logout };
+  return { login, logout, register };
 };
 
 export default useAuth;

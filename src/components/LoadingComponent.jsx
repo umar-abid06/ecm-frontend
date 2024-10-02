@@ -1,10 +1,18 @@
 // src/components/LoadingComponent.jsx
 import React from "react";
+import Lottie from "lottie-react";
+import loadingAnimation from "../assets/lottie/loading-animation.json";
 
-const LoadingComponent = () => {
+const LoadingComponent = ({ height = 150, width = 150 }) => {
   return (
-    <div className="flex justify-center items-center h-full m-2">
-      <div className="m-16 animate-spin rounded-full h-40 w-40 border-t-4 border-black border-opacity-50 bg-red-700"></div>
+    <div className="flex items-center justify-center h-screen">
+      <Lottie
+        animationData={loadingAnimation} // Load the Lottie animation JSON file
+        style={{ height, width }} // You can pass dynamic height and width props
+        loop={true} // Loop the animation
+        autoplay={true} // Autoplay the animation
+      />
+      <p>Loading, please wait...</p>
     </div>
   );
 };
