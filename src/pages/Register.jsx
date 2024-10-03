@@ -17,10 +17,11 @@ const Register = () => {
         toast.success("Check your email inbox. Please verify the email!");
         navigate("/auth/login");
       } else {
-        toast.error(`${response}
-          Kindly Verify your Email in your Inbox!`);
+        toast.error(`${response.data.message}
+    `);
       }
     } catch (err) {
+      toast.error(err);
       console.error("Registration error:", err);
     }
   };

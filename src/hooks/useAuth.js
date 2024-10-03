@@ -10,10 +10,12 @@ const useAuth = () => {
   const login = async (credentials) => {
     try {
       const response = await requestApi(ENDPOINTS.LOGIN, "post", credentials);
-      console.log("Response in useAuth", response);
+      // console.log("Response in useAuth", response);
       setUserAuthentication(true, response); // Save token in Zustand and local storage
+      return response;
     } catch (error) {
-      console.error("Login failed:", error);
+      // console.log("Login failed:", error.data);
+      return error.data;
     }
   };
 
@@ -30,7 +32,7 @@ const useAuth = () => {
         "post",
         credentials
       );
-      // console.log("Regis Authform", response);
+      console.log("Regis Authform", response);
 
       return response;
     } catch (error) {

@@ -16,15 +16,20 @@ const AuthForm = ({
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(validationSchema), // Apply the correct validation schema
     mode: "onBlur",
   });
 
   const [showPassword, setShowPassword] = useState(false); // Toggle password visibility
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // Toggle password visibility
 
   const handleTogglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+  const handleToggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
   };
 
   const passwordIcons = {
@@ -34,10 +39,17 @@ const AuthForm = ({
       onClick: handleTogglePasswordVisibility,
     },
   };
+  const confirmPasswordIcons = {
+    start: { icon: <FaLock className="text-gray-400" /> },
+    end: {
+      icon: !showConfirmPassword ? <FaEyeSlash /> : <FaEye />,
+      onClick: handleToggleConfirmPasswordVisibility,
+    },
+  };
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmitHandler)}
+      onSubmit={handleSubmit((data) => onSubmitHandler(data, reset))}
       className="p-4 w-full max-w-sm mx-auto bg-white rounded-md shadow-md"
     >
       {isRegister && (
@@ -83,11 +95,9 @@ const AuthForm = ({
           name="confirmPassword"
           control={control}
           placeholder="Confirm your password"
-          type="password"
+          type={showConfirmPassword ? "text" : "password"}
           error={errors.confirmPassword?.message}
-          icons={{
-            start: { icon: <FaLock className="text-gray-400" /> },
-          }}
+          icons={confirmPasswordIcons}
           className="mb-4"
         />
       )}
