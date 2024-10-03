@@ -3,16 +3,21 @@ import React from "react";
 import Lottie from "lottie-react";
 import loadingAnimation from "../assets/lottie/loading-animation.json";
 
-const LoadingComponent = ({ height = 150, width = 150 }) => {
+const LoadingComponent = () => {
   return (
     <div className="flex items-center justify-center h-screen">
       <Lottie
         animationData={loadingAnimation} // Load the Lottie animation JSON file
-        style={{ height, width }} // You can pass dynamic height and width props
+        className="
+            w-32 h-32 
+            sm:w-40 sm:h-40 
+          " // Use Tailwind for responsive sizes
         loop={true} // Loop the animation
         autoplay={true} // Autoplay the animation
       />
-      <p>Loading, please wait...</p>
+      <p className="text-center text-sm sm:text-base md:text-lg">
+        Loading, please wait...
+      </p>
     </div>
   );
 };

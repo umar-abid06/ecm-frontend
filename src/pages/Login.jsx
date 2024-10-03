@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { loginValidationSchema } from "../utils/validationSchema.js";
 import useAuth from "../hooks/useAuth.js";
 import AuthForm from "../components/auth/AuthForm.jsx";
 import { toast } from "react-toastify";
 
-function Login() {
+const Login = () => {
   const { login } = useAuth();
+
   const handleLoginSubmit = async (data, reset) => {
     try {
       // Call the login function from the useAuth hook with credentials
@@ -30,11 +31,14 @@ function Login() {
   };
 
   return (
-    <AuthForm
-      validationSchema={loginValidationSchema}
-      onSubmitHandler={handleLoginSubmit}
-    />
+    <div className="flex items-center justify-center min-h-screen bg-gray-200 pb-32">
+      <AuthForm
+        validationSchema={loginValidationSchema}
+        onSubmitHandler={handleLoginSubmit}
+        buttonText="Login"
+      />
+    </div>
   );
-}
+};
 
 export default Login;

@@ -10,7 +10,7 @@ const Home = () => {
   toast.success(userData?.message);
 
   const handleLogout = () => {
-    console.log("Trying to logout!");
+    // console.log("Trying to logout!");
     logout();
   };
   return (

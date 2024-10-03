@@ -1,10 +1,14 @@
 // src/api/requestApi.js
+import useLoadingStore from "../store/loadingStore";
 import apiClient from "./apiClient";
 
 // Function to handle all API requests with a unified response format
 export async function requestApi(url, method, data = {}, config = {}) {
+  const { setLoading } = useLoadingStore.getState();
+  setLoading(true);
   const response = await apiClient[method](url, data, config);
-  console.log("res--> ", response);
+  setLoading(false);
+  // console.log("res--> ", response);
   if (!response.ok) {
     // Throw the entire response data object or response object
     const errorData = {

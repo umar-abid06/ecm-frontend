@@ -22,16 +22,18 @@ const Register = () => {
       }
     } catch (err) {
       toast.error(err);
-      console.error("Registration error:", err);
+      // console.error("Registration error:", err);
     }
   };
   return (
-    <AuthForm
-      validationSchema={registerValidationSchema}
-      onSubmitHandler={handleRegisterSubmit}
-      isRegister={true}
-      buttonText="Register"
-    />
+    <div className="flex items-center justify-center min-h-screen bg-gray-200 pb-10">
+      <AuthForm
+        validationSchema={registerValidationSchema}
+        onSubmitHandler={handleRegisterSubmit}
+        isRegister={true}
+        buttonText="Register"
+      />
+    </div>
   );
 };
 

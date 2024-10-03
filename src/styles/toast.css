@@ -1,0 +1,33 @@
+/* src/styles/toast.css */
+.toast-container .Toastify__toast {
+  font-size: 14px;
+  padding: 10px;
+}
+
+@media (min-width: 640px) {
+  .toast-container .Toastify__toast {
+    font-size: 16px;
+    padding: 12px;
+  }
+}
+
+/* @media (min-width: 768px) {
+  .toast-container .Toastify__toast {
+    font-size: 18px;
+    padding: 14px;
+  }
+} */
+
+/* @media (min-width: 1024px) {
+  .toast-container .Toastify__toast {
+    font-size: 20px;
+    padding: 16px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .toast-container .Toastify__toast {
+    font-size: 22px;
+    padding: 18px;
+  }
+} */
