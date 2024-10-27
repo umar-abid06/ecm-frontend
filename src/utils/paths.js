@@ -12,6 +12,6 @@ export const PATHS = {
     REGISTER: path(ROOTS_AUTH, "/register"),
   },
   APP: {
-    HOME: path(ROOTS_APP, "/home"),
+    HOME: path(ROOTS_APP, "/"),
   },
 };

@@ -10,5 +10,5 @@ export const AuthGuard = ({ children }) => {
 export const GuestGuard = ({ children }) => {
   const { isAuth } = useAuthStore(); // Access authentication state using the custom hook
 
-  return !isAuth ? children : <Navigate to="/home" />; // Redirect to home if already authenticated
+  return !isAuth ? children : <Navigate to="/" />; // Redirect to home if already authenticated
 };

@@ -11,14 +11,14 @@ const Login = () => {
     try {
       // Call the login function from the useAuth hook with credentials
       const response = await login(data);
-      // console.log("Resp in Login", response);
+      console.log("Resp in Login", response);
 
       if (response.status === "ERROR") {
         toast.error(response.message);
         // Reset the form fields on error
         reset();
       } else {
-        toast.success("Successfully Login!");
+        toast.success(response?.message);
         // Optionally clear the form on successful login (if you need to)
         reset();
       }
