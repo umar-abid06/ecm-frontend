@@ -12,6 +12,10 @@ export const PATHS = {
     REGISTER: path(ROOTS_AUTH, "/register"),
   },
   APP: {
-    HOME: path(ROOTS_APP, "/"),
+    HOME: path(ROOTS_APP, ""),
+    BESTSELLING: path(ROOTS_APP, "best-selling"),
+    PRODUCTS: path(ROOTS_APP, "products"),
+    EVENTS: path(ROOTS_APP, "events"),
+    FAQ: path(ROOTS_APP, "faq"),
   },
 };

@@ -1,7 +1,7 @@
 // src/routes/AppRouter.js
 import { useRoutes, Navigate } from "react-router-dom";
 import { PATHS } from "../utils/paths";
-import { Home, Login, Register } from "./LazyImports";
+import { Home, Login, Register, BestSelling } from "./LazyImports";
 import { AuthGuard, GuestGuard } from "../auth/Guards";
 import ErrorBoundary from "../components/ErrorBoundary.jsx"; // Import the ErrorBoundary
 import NotFoundComponent from "../components/NotFoundComponent.jsx"; // Import the 404 component
@@ -31,6 +31,38 @@ const AppRoutes = () =>
       element: (
         <AuthGuard>
           <Home />
+        </AuthGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.BESTSELLING,
+      element: (
+        <AuthGuard>
+          <BestSelling />
+        </AuthGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.PRODUCTS,
+      element: (
+        <AuthGuard>
+          <BestSelling />
+        </AuthGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.EVENTS,
+      element: (
+        <AuthGuard>
+          <BestSelling />
+        </AuthGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.FAQ,
+      element: (
+        <AuthGuard>
+          <BestSelling />
         </AuthGuard>
       ),
     },

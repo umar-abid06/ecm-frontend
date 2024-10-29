@@ -1,24 +1,26 @@
+import { PATHS } from "../utils/paths";
+
 // navigation Data
 export const navItems = [
   {
     title: "Home",
-    url: "/",
+    url: PATHS.APP.HOME,
   },
   {
     title: "Best Selling",
-    url: "/best-selling",
+    url: PATHS.APP.BESTSELLING,
   },
   {
     title: "Products",
-    url: "/products",
+    url: PATHS.APP.PRODUCTS,
   },
   {
     title: "Events",
-    url: "/events",
+    url: PATHS.APP.EVENTS,
   },
   {
     title: "FAQ",
-    url: "/faq",
+    url: PATHS.APP.FAQ,
   },
 ];
 
