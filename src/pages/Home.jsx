@@ -1,9 +1,16 @@
 import React from "react";
 import useAuth from "../hooks/useAuth";
-import { toast } from "react-toastify";
 import useAuthStore from "../store/auth/authStore";
 import Header from "../components/layout/header";
 import Hero from "../components/layout/hero";
+import Footer from "../components/layout/footer";
+import {
+  Categories,
+  BestDeals,
+  Sponsored,
+  FeaturedProduct,
+} from "../components/home";
+import { Events } from "../components/events";
 
 const Home = () => {
   const { isAuth, userData } = useAuthStore();
@@ -17,14 +24,13 @@ const Home = () => {
     <div>
       <Header activeHeading={1} />
       <Hero />
-      {/* <Categories />
+      <Categories />
       <BestDeals />
       <Events />
       <FeaturedProduct />
       <Sponsored />
-      <Footer /> */}
-      <h1>You are {isAuth ? "Authenticated" : "Unauthenticated"}</h1>
-      <h1>The user name is : {userData?.data?.name}</h1>
+      <Footer />
+
       <button onClick={handleLogout}>Logout</button>
     </div>
   );

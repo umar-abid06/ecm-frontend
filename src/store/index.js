@@ -5,6 +5,7 @@ import { useWishlistStore } from "./wishlist/wishlistStore";
 import useAuthStore from "./auth/authStore";
 import useLoadingStore from "./loadingStore";
 import { useSellerStore } from "./seller/sellerStore";
+import { useEventStore } from "./events/eventStore";
 
 export const useStore = () => ({
   ...useProductStore(),
@@ -13,4 +14,5 @@ export const useStore = () => ({
   ...useAuthStore(),
   ...useLoadingStore(),
   ...useSellerStore(),
+  ...useEventStore(),
 });

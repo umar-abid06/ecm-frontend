@@ -15,19 +15,9 @@ import Navbar from "../navbar";
 import Cart from "../../cart";
 import Wishlist from "../../wishlist";
 import { RxCross1 } from "react-icons/rx";
-// Importing from store/index.js
 import { useStore } from "../../../store";
 
 const Header = ({ activeHeading }) => {
-  //   const { isAuthenticated, user } = useAuthStore((state) => ({
-  //     isAuthenticated: state.isAuth,
-  //     user: state.userData,
-  //   }));
-  //   const isSeller = useSellerStore((state) => state.isSeller);
-  //   const wishlist = useWishlistStore((state) => state.wishlist);
-  //   const cart = useCartStore((state) => state.cart);
-  //   const products = useProductStore((state) => state.products);
-
   const {
     isAuth: isAuthenticated,
     userData: user,
@@ -36,6 +26,7 @@ const Header = ({ activeHeading }) => {
     cart,
     products,
   } = useStore();
+
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState(null);
   const [active, setActive] = useState(false);

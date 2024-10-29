@@ -23,4 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 .env
-key-pairs/ecm-frontend-kp.pem
+key-pairs
