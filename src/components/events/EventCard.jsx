@@ -8,7 +8,7 @@ const EventCard = ({ active, data }) => {
   const { cart, addToCart } = useStore;
 
   const addToCartHandler = (data) => {
-    const isItemExists = cart && cart.find((i) => i._id === data._id);
+    const isItemExists = cart && cart.find((i) => i.id === data.id);
     if (isItemExists) {
       toast.error("Item already in cart!");
     } else {
