@@ -20,7 +20,7 @@ const ProductCard = ({ data, isEvent }) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (wishlist && wishlist.find((i) => i._id === data._id)) {
+    if (wishlist && wishlist.find((i) => i.id === data.id)) {
       setClick(true);
     } else {
       setClick(false);
