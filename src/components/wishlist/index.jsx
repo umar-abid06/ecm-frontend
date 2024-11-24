@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import styles from "../../styles/styles";
+import { useStore } from "../../store";
+import { AiOutlineHeart } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
 import { BsCartPlus } from "react-icons/bs";
-import styles from "../../styles/styles";
-import { AiOutlineHeart } from "react-icons/ai";
-import { useStore } from "../../store";
 
 const Wishlist = ({ setOpenWishlist }) => {
   const { wishlist, removeFromWishlist, addToCart } = useStore();

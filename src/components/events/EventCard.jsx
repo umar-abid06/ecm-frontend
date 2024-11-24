@@ -1,11 +1,10 @@
-import styles from "../../styles/styles";
-import { CountDown } from "./";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useStore } from "../../store";
+import styles from "../../styles/styles";
+import { CountDown } from "./";
 
 const EventCard = ({ active, data }) => {
-  const { cart, addToCart } = useStore;
+  const { cart, addToCart } = useStore();
 
   const addToCartHandler = (data) => {
     const isItemExists = cart && cart.find((i) => i.id === data.id);
