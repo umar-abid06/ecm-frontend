@@ -9,6 +9,7 @@ import {
   Products,
   Events,
   FAQ,
+  Profile,
 } from "./LazyImports";
 import { AuthGuard, GuestGuard } from "../auth/Guards";
 import ErrorBoundary from "../components/ErrorBoundary.jsx"; // Import the ErrorBoundary
@@ -71,6 +72,14 @@ const AppRoutes = () =>
       element: (
         <AuthGuard>
           <FAQ />
+        </AuthGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.PROFILE,
+      element: (
+        <AuthGuard>
+          <Profile />
         </AuthGuard>
       ),
     },

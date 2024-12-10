@@ -16,6 +16,7 @@ import Cart from "../../cart";
 import Wishlist from "../../wishlist";
 import { RxCross1 } from "react-icons/rx";
 import { useStore } from "../../../store";
+import { PATHS } from "../../../utils/paths.js";
 
 const Header = ({ activeHeading }) => {
   const {
@@ -47,6 +48,7 @@ const Header = ({ activeHeading }) => {
           .toLowerCase()
           .includes(term.slice(0, 2).toLowerCase())
       );
+
     setSearchData(filteredProducts);
   };
 
@@ -188,7 +190,7 @@ const Header = ({ activeHeading }) => {
                     />
                   </Link>
                 ) : (
-                  <Link to="/login">
+                  <Link to={PATHS.AUTH.LOGIN}>
                     <CgProfile size={30} color="rgb(255 255 255 / 83%)" />
                   </Link>
                 )}

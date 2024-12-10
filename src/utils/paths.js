@@ -17,5 +17,6 @@ export const PATHS = {
     PRODUCTS: path(ROOTS_APP, "products"),
     EVENTS: path(ROOTS_APP, "events"),
     FAQ: path(ROOTS_APP, "faq"),
+    PROFILE: path(ROOTS_APP, "profile"),
   },
 };
