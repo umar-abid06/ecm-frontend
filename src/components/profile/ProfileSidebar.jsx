@@ -11,22 +11,26 @@ import { RxPerson } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
 // import { server } from "../../server";
 import { useStore } from "../../store";
+import useAuth from "../../hooks/useAuth";
 
 const ProfileSidebar = ({ setActive, active }) => {
   const navigate = useNavigate();
   const { userData: user, isLoading } = useStore();
-  //   const logoutHandler = () => {
-  //     axios
-  //       .get(`${server}/user/logout`, { withCredentials: true })
-  //       .then((res) => {
-  //         toast.success(res.data.message);
-  //         window.location.reload(true);
-  //         navigate("/login");
-  //       })
-  //       .catch((error) => {
-  //         console.log(error.response.data.message);
-  //       });
-  //   };
+  const { logout } = useAuth();
+
+  const logoutHandler = () => {
+    logout();
+    // axios
+    //   .get(`${server}/user/logout`, { withCredentials: true })
+    //   .then((res) => {
+    //     toast.success(res.data.message);
+    //     window.location.reload(true);
+    //     navigate("/login");
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.response.data.message);
+    //   });
+  };
   return (
     <div className="w-full bg-white shadow-sm rounded-[10px] p-4 pt-8">
       <div
@@ -133,7 +137,7 @@ const ProfileSidebar = ({ setActive, active }) => {
       )}
       <div
         className="single_item flex items-center cursor-pointer w-full mb-8"
-        // onClick={logoutHandler}
+        onClick={logoutHandler}
       >
         <AiOutlineLogin size={20} color={active === 8 ? "red" : ""} />
         <span

@@ -21,11 +21,9 @@ import { Country, State } from "country-state-city";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { useStore } from "../../store";
-// import axios from "axios";
-// import { getAllOrdersOfUser } from "../../redux/actions/order";
 
 const ProfileContent = ({ active }) => {
-  const { userData: user } = useStore();
+  const { userData: user, updateUserInformation } = useStore();
   // error, successMessage;
   const [name, setName] = useState(user && user.name);
   const [email, setEmail] = useState(user && user.email);
@@ -46,7 +44,7 @@ const ProfileContent = ({ active }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // dispatch(updateUserInformation(name, email, phoneNumber, password));
+    updateUserInformation(name, email, phoneNumber, password);
   };
 
   // const handleImage = async (e) => {
@@ -201,13 +199,15 @@ const ProfileContent = ({ active }) => {
 };
 
 const AllOrders = () => {
-  const { user } = useSelector((state) => state.user);
-  const { orders } = useSelector((state) => state.order);
-  // const dispatch = useDispatch();
+  const { userData: user, orders, getAllOrdersOfUser } = useStore();
 
   useEffect(() => {
-    // dispatch(getAllOrdersOfUser(user._id));
-  }, []);
+    const fetchOrders = async () => {
+      await getAllOrdersOfUser(user?.id);
+    };
+
+    fetchOrders();
+  }, [getAllOrdersOfUser]);
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
@@ -286,13 +286,15 @@ const AllOrders = () => {
 };
 
 const AllRefundOrders = () => {
-  const { user } = useSelector((state) => state.user);
-  const { orders } = useSelector((state) => state.order);
-  const dispatch = useDispatch();
+  const { userData: user, orders, getAllOrdersOfUser } = useStore();
 
   useEffect(() => {
-    dispatch(getAllOrdersOfUser(user._id));
-  }, []);
+    const fetchOrders = async () => {
+      await getAllOrdersOfUser(user?.id);
+    };
+
+    fetchOrders();
+  }, [getAllOrdersOfUser]);
 
   const eligibleOrders =
     orders && orders.filter((item) => item.status === "Processing refund");
@@ -374,12 +376,15 @@ const AllRefundOrders = () => {
 };
 
 const TrackOrder = () => {
-  const { user } = useSelector((state) => state.user);
-  const { orders } = useSelector((state) => state.order);
+  const { userData: user, orders, getAllOrdersOfUser } = useStore();
 
   useEffect(() => {
-    // dispatch(getAllOrdersOfUser(user._id));
-  }, []);
+    const fetchOrders = async () => {
+      await getAllOrdersOfUser(user?.id);
+    };
+
+    fetchOrders();
+  }, [getAllOrdersOfUser]);
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
@@ -542,7 +547,7 @@ const Address = () => {
   const [address1, setAddress1] = useState("");
   const [address2, setAddress2] = useState("");
   const [addressType, setAddressType] = useState("");
-  const { user } = useSelector((state) => state.user);
+  const { userData: user, updateUserAddress, deleteUserAddress } = useStore();
 
   const addressTypeData = [
     {
@@ -562,15 +567,13 @@ const Address = () => {
     if (addressType === "" || country === "" || city === "") {
       toast.error("Please fill all the fields!");
     } else {
-      dispatch(
-        updatUserAddress(
-          country,
-          city,
-          address1,
-          address2,
-          zipCode,
-          addressType
-        )
+      updateUserAddress(
+        country,
+        city,
+        address1,
+        address2,
+        zipCode,
+        addressType
       );
       setOpen(false);
       setCountry("");
@@ -583,8 +586,8 @@ const Address = () => {
   };
 
   const handleDelete = (item) => {
-    const id = item._id;
-    // dispatch(deleteUserAddress(id));
+    const id = item.id;
+    deleteUserAddress(id);
   };
 
   return (
@@ -739,7 +742,7 @@ const Address = () => {
       </div>
       <br />
       {user &&
-        user.addresses.map((item, index) => (
+        user?.addresses?.map((item, index) => (
           <div
             className="w-full bg-white h-min md:h-[70px] rounded-[4px] flex items-center px-3 shadow justify-between pr-10 mb-5"
             key={index}
@@ -749,12 +752,12 @@ const Address = () => {
             </div>
             <div className="pl-8 flex items-center">
               <h6 className="text-[12px] md:text-[unset]">
-                {item.address1} {item.address2}
+                {item?.address1} {item.address2}
               </h6>
             </div>
             <div className="pl-8 flex items-center">
               <h6 className="text-[12px] md:text-[unset]">
-                {user && user.phoneNumber}
+                {user && user?.phoneNumber}
               </h6>
             </div>
             <div className="min-w-[10%] flex items-center justify-between pl-8">
@@ -767,7 +770,7 @@ const Address = () => {
           </div>
         ))}
 
-      {user && user.addresses.length === 0 && (
+      {user && user?.addresses?.length === 0 && (
         <h5 className="text-center pt-8 text-[18px]">
           You not have any saved address!
         </h5>

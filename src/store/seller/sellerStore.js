@@ -1,11 +1,45 @@
 import { create } from "zustand";
+import { requestApi } from "../../api/requestApi";
+import { ENDPOINTS } from "../../api/endpoints";
 
 export const useSellerStore = create((set) => ({
-  isSeller: false, // Initial state
+  isLoading: true,
+  isSeller: false,
+  seller: null,
+  sellers: null,
+  error: null,
 
-  // Action to toggle the seller status
-  toggleSeller: () => set((state) => ({ isSeller: !state.isSeller })),
+  // Actions
+  loadSeller: async () => {
+    //To be changed when APIS are formed
+    // set({ isLoading: true });
+    set({ isLoading: false });
+    try {
+      const data = await requestApi(ENDPOINTS.LOAD_SELLER, "get");
+      set({ isLoading: false, isSeller: true, seller: data, error: null });
+    } catch (error) {
+      set({
+        isLoading: false,
+        isSeller: false,
+        error: error.message || "Error loading seller",
+      });
+    }
+  },
 
-  // Action to set seller status explicitly
-  setIsSeller: (status) => set({ isSeller: status }),
+  getAllSellers: async () => {
+    //To be changed when APIS are formed
+    // set({ isLoading: true });
+    set({ isLoading: false });
+    try {
+      const data = await requestApi(ENDPOINTS.ADMIN_ALL_SELLERS, "get");
+      set({ isLoading: false, sellers: data.sellers, error: null });
+    } catch (error) {
+      set({
+        isLoading: false,
+        error: error.message || "Error fetching all sellers",
+      });
+    }
+  },
+
+  clearErrors: () => set({ error: null }),
 }));

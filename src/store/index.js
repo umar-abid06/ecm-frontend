@@ -2,10 +2,12 @@
 import { useProductStore } from "./products/productStore";
 import { useCartStore } from "./cart/cartStore";
 import { useWishlistStore } from "./wishlist/wishlistStore";
-import useAuthStore from "./auth/authStore";
-import useLoadingStore from "./loadingStore";
 import { useSellerStore } from "./seller/sellerStore";
 import { useEventStore } from "./events/eventStore";
+import { useOrderStore } from "./orders/orderStore";
+import useAuthStore from "./auth/authStore";
+import useLoadingStore from "./loadingStore";
+import { useUserStore } from "./user/userStore";
 
 export const useStore = () => ({
   ...useProductStore(),
@@ -15,4 +17,6 @@ export const useStore = () => ({
   ...useLoadingStore(),
   ...useSellerStore(),
   ...useEventStore(),
+  ...useOrderStore(),
+  ...useUserStore(),
 });
