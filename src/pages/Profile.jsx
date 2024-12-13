@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ProfileSideBar, ProfileContent } from "../components/profile";
+import { ProfileSidebar, ProfileContent } from "../components/profile";
 import LoadingComponent from "../components/LoadingComponent";
 import Header from "../components/layout/header";
 import styles from "../styles/styles";
@@ -17,8 +17,8 @@ const Profile = () => {
         <>
           <Header />
           <div className={`${styles.section} flex bg-[#f5f5f5] py-10`}>
-            <div className="w-[50px] 800px:w-[335px] sticky 800px:mt-0 mt-[18%]">
-              <ProfileSideBar active={active} setActive={setActive} />
+            <div className="w-[50px] md:w-[335px] sticky md:mt-0 mt-[18%]">
+              <ProfileSidebar active={active} setActive={setActive} />
             </div>
             <ProfileContent active={active} />
           </div>
