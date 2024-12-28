@@ -3,7 +3,7 @@ import { requestApi } from "../../api/requestApi";
 import { ENDPOINTS } from "../../api/endpoints";
 
 export const useSellerStore = create((set) => ({
-  isLoading: true,
+  isShopLoading: true,
   isSeller: false,
   seller: null,
   sellers: null,

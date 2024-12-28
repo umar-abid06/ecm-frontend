@@ -10,8 +10,24 @@ import {
   Events,
   FAQ,
   Profile,
+  ShopCreate,
+  ShopPreview,
+  ShopLogin,
+  ShopHome,
+  ShopSettings,
+  ShopDashboard,
+  ShopCreateProduct,
+  ShopAllProducts,
+  ShopAllRefunds,
+  ShopAllOrders,
+  ShopAllEvents,
+  ShopAllCoupouns,
+  ShopCreateEvents,
+  ShopInbox,
+  ShopWithDrawMoney,
+  ShopOrderDetails,
 } from "./LazyImports";
-import { AuthGuard, GuestGuard } from "../auth/Guards";
+import { AuthGuard, GuestGuard, SellerGuard } from "../auth/Guards";
 import ErrorBoundary from "../components/ErrorBoundary.jsx"; // Import the ErrorBoundary
 import NotFoundComponent from "../components/NotFoundComponent.jsx"; // Import the 404 component
 
@@ -83,6 +99,143 @@ const AppRoutes = () =>
         </AuthGuard>
       ),
     },
+    {
+      path: PATHS.APP.SHOP_CREATE,
+      element: (
+        <GuestGuard>
+          <ShopCreate />
+        </GuestGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.SHOP_PREVIEW,
+      element: (
+        <GuestGuard>
+          <ShopPreview />
+        </GuestGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.SHOP_LOGIN,
+      element: (
+        <GuestGuard>
+          <ShopLogin />
+        </GuestGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.SHOP_HOME,
+      element: (
+        <SellerGuard>
+          <ShopHome />
+        </SellerGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.SHOP_SETTINGS,
+      element: (
+        <SellerGuard>
+          <ShopSettings />
+        </SellerGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.SHOP_ORDER,
+      element: (
+        <SellerGuard>
+          <ShopOrderDetails />
+        </SellerGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.SHOP_DASHBOARD,
+      element: (
+        <SellerGuard>
+          <ShopDashboard />
+        </SellerGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.SHOP_DASHBOARD_CREATE_PRODUCT,
+      element: (
+        <SellerGuard>
+          <ShopCreateProduct />
+        </SellerGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.SHOP_DASHBOARD_PRODUCTS,
+      element: (
+        <SellerGuard>
+          <ShopAllProducts />
+        </SellerGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.SHOP_DASHBOARD_ORDERS,
+      element: (
+        <SellerGuard>
+          <ShopAllOrders />
+        </SellerGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.SHOP_DASHBOARD_REFUNDS,
+      element: (
+        <SellerGuard>
+          <ShopAllRefunds />
+        </SellerGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.SHOP_DASHBOARD_EVENTS,
+      element: (
+        <SellerGuard>
+          <ShopAllEvents />
+        </SellerGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.SHOP_DASHBOARD_CREATE_EVENT,
+      element: (
+        <SellerGuard>
+          <ShopCreateEvents />
+        </SellerGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.SHOP_DASHBOARD_COUPOUNS,
+      element: (
+        <SellerGuard>
+          <ShopAllCoupouns />
+        </SellerGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.SHOP_DASHBOARD_MESSAGES,
+      element: (
+        <SellerGuard>
+          <ShopInbox />
+        </SellerGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.SHOP_DASHBOARD_MESSAGES,
+      element: (
+        <SellerGuard>
+          <ShopInbox />
+        </SellerGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.SHOP_DASHBOARD_WITHDRAW_MONEY,
+      element: (
+        <SellerGuard>
+          <ShopWithDrawMoney />
+        </SellerGuard>
+      ),
+    },
+
     // Catch-All Route: Displays 404 for undefined paths
     {
       path: "*",
