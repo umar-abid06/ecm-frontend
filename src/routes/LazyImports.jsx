@@ -11,6 +11,12 @@ export const Products = Loadable(lazy(() => import("../pages/Products")));
 export const Events = Loadable(lazy(() => import("../pages/Events")));
 export const Profile = Loadable(lazy(() => import("../pages/Profile")));
 
+export const Checkout = Loadable(lazy(() => import("../pages/Checkout")));
+export const Payment = Loadable(lazy(() => import("../pages/Payment")));
+export const OrderSuccess = Loadable(
+  lazy(() => import("../pages/OrderSuccess"))
+);
+
 // Shop Routes
 export const ShopCreate = Loadable(lazy(() => import("../pages/ShopCreate")));
 export const ShopPreview = Loadable(

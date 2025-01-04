@@ -19,6 +19,10 @@ export const PATHS = {
     FAQ: path(ROOTS_APP, "faq"),
     PROFILE: path(ROOTS_APP, "profile"),
 
+    CHECKOUT: path(ROOTS_APP, "checkout"),
+    PAYMENT: path(ROOTS_APP, "payment"),
+    ORDER_SUCCESS: path(ROOTS_APP, "order/success"),
+
     // Shop Routes
     SHOP_CREATE: path(ROOTS_APP, "shop-create"),
     SHOP_PREVIEW: path(ROOTS_APP, "shop/preview/:id"),

@@ -26,13 +26,22 @@ import {
   ShopInbox,
   ShopWithDrawMoney,
   ShopOrderDetails,
+  Checkout,
+  Payment,
+  OrderSuccess,
 } from "./LazyImports";
 import { AuthGuard, GuestGuard, SellerGuard } from "../auth/Guards";
 import ErrorBoundary from "../components/ErrorBoundary.jsx"; // Import the ErrorBoundary
 import NotFoundComponent from "../components/NotFoundComponent.jsx"; // Import the 404 component
+import { Elements } from "@stripe/react-stripe-js";
+import { getStripePromise } from "../utils/stripe.js";
+import useStripeApiKey from "../hooks/useStripe.js";
 
-const AppRoutes = () =>
-  useRoutes([
+const AppRoutes = () => {
+  const stripeApiKey = useStripeApiKey();
+
+  const stripePromise = getStripePromise(stripeApiKey);
+  const routes = useRoutes([
     // Authentication Routes
     {
       path: PATHS.AUTH.LOGIN,
@@ -100,11 +109,39 @@ const AppRoutes = () =>
       ),
     },
     {
+      path: PATHS.APP.CHECKOUT,
+      element: (
+        // <AuthGuard>
+        <Checkout />
+        // </AuthGuard>
+      ),
+    },
+    // Payment Route
+    stripePromise && {
+      path: PATHS.APP.PAYMENT,
+      element: (
+        <Elements stripe={stripePromise}>
+          {/* <ProtectedRoute> */}
+          <Payment />
+          {/* </ProtectedRoute> */}
+        </Elements>
+      ),
+    },
+    {
+      path: PATHS.APP.ORDER_SUCCESS,
+      element: (
+        // <AuthGuard>
+        <OrderSuccess />
+        // </AuthGuard>
+      ),
+    },
+    //Shop Routes
+    {
       path: PATHS.APP.SHOP_CREATE,
       element: (
-        <GuestGuard>
-          <ShopCreate />
-        </GuestGuard>
+        // <GuestGuard>
+        <ShopCreate />
+        // </GuestGuard>
       ),
     },
     {
@@ -242,6 +279,8 @@ const AppRoutes = () =>
       element: <NotFoundComponent />, // Show the 404 component instead of redirecting
     },
   ]);
+  return routes;
+};
 
 export default function Router() {
   return (

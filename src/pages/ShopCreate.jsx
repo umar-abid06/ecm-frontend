@@ -7,11 +7,11 @@ const ShopCreatePage = () => {
   const navigate = useNavigate();
   const { isSeller, seller } = useStore();
 
-  useEffect(() => {
-    if (isSeller === true) {
-      navigate(`/shop/${seller._id}`);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (isSeller === true) {
+  //     navigate(`/shop/${seller._id}`);
+  //   }
+  // }, []);
   return (
     <div>
       <ShopCreate />

@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 // import { server } from "../../server";
 import { toast } from "react-toastify";
 import { RxAvatar } from "react-icons/rx";
+import { PATHS } from "../../utils/paths";
 
 const ShopCreate = () => {
   const [email, setEmail] = useState("");
@@ -238,7 +239,7 @@ const ShopCreate = () => {
             </div>
             <div className={`${styles.normalFlex} w-full`}>
               <h4>Already have an account?</h4>
-              <Link to="/shop-login" className="text-blue-600 pl-2">
+              <Link to={PATHS.APP.SHOP_LOGIN} className="text-blue-600 pl-2">
                 Sign in
               </Link>
             </div>
