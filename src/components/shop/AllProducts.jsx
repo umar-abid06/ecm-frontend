@@ -1,25 +1,20 @@
-import { Button } from "@material-ui/core";
-import { DataGrid } from "@material-ui/data-grid";
+import Button from "@mui/material/Button";
+import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect } from "react";
 import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getAllProductsShop } from "../../redux/actions/product";
-import { deleteProduct } from "../../redux/actions/product";
-import Loader from "../Layout/Loader";
+import LoadingComponent from "../LoadingComponent";
+import { useStore } from "../../store";
 
 const AllProducts = () => {
-  const { products, isLoading } = useSelector((state) => state.products);
-  const { seller } = useSelector((state) => state.seller);
+  const { products, isLoading, deleteProduct } = useStore();
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllProductsShop(seller._id));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getAllProductsShop(seller?.id));
+  // }, []);
 
   const handleDelete = (id) => {
-    dispatch(deleteProduct(id));
+    deleteProduct(id);
     window.location.reload();
   };
 
@@ -95,18 +90,18 @@ const AllProducts = () => {
   products &&
     products.forEach((item) => {
       row.push({
-        id: item._id,
+        id: item.id,
         name: item.name,
-        price: "US$ " + item.discountPrice,
+        price: "US$ " + item.discount_price,
         Stock: item.stock,
-        sold: item?.sold_out,
+        sold: item?.total_sell,
       });
     });
 
   return (
     <>
       {isLoading ? (
-        <Loader />
+        <LoadingComponent />
       ) : (
         <div className="w-full mx-8 pt-1 mt-10 bg-white">
           <DataGrid

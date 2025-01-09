@@ -29,6 +29,7 @@ import {
   Checkout,
   Payment,
   OrderSuccess,
+  ProductDetails,
 } from "./LazyImports";
 import { AuthGuard, GuestGuard, SellerGuard } from "../auth/Guards";
 import ErrorBoundary from "../components/ErrorBoundary.jsx"; // Import the ErrorBoundary
@@ -82,6 +83,14 @@ const AppRoutes = () => {
         <AuthGuard>
           <Products />
         </AuthGuard>
+      ),
+    },
+    {
+      path: PATHS.APP.PRODUCT_DETAILS,
+      element: (
+        // <AuthGuard>
+        <ProductDetails />
+        // </AuthGuard>
       ),
     },
     {

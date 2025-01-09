@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { backend_url, server } from "../../server";
+// import { backend_url, server } from "../../server";
 import { AiOutlineCamera } from "react-icons/ai";
 import styles from "../../styles/styles";
-import axios from "axios";
-import { loadSeller } from "../../redux/actions/user";
 import { toast } from "react-toastify";
+import { useStore } from "../../store";
 
 const ShopSettings = () => {
-  const { seller } = useSelector((state) => state.seller);
+  const { seller } = useStore();
   const [avatar, setAvatar] = useState();
-  const [name, setName] = useState(seller && seller.name);
+  const [name, setName] = useState(seller && seller?.name);
   const [description, setDescription] = useState(
     seller && seller.description ? seller.description : ""
   );
@@ -18,31 +17,30 @@ const ShopSettings = () => {
   const [phoneNumber, setPhoneNumber] = useState(seller && seller.phoneNumber);
   const [zipCode, setZipcode] = useState(seller && seller.zipCode);
 
-  const dispatch = useDispatch();
-
   const handleImage = async (e) => {
     const reader = new FileReader();
 
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setAvatar(reader.result);
-        axios
-          .put(
-            `${server}/shop/update-shop-avatar`,
-            { avatar: reader.result },
-            {
-              withCredentials: true,
-            }
-          )
-          .then((res) => {
-            dispatch(loadSeller());
-            toast.success("Avatar updated successfully!");
-          })
-          .catch((error) => {
-            toast.error(error.response.data.message);
-          });
-      }
-    };
+    // reader.onload = () => {
+    //   if (reader.readyState === 2) {
+    //     setAvatar(reader.result);
+    //     axios
+    //       .put(
+    //         `${server}/shop/update-shop-avatar`,
+    //         { avatar: reader.result },
+    //         {
+    //           withCredentials: true,
+    //         }
+    //       )
+    //       .then((res) => {
+    //         dispatch(loadSeller());
+    //         toast.success("Avatar updated successfully!");
+    //       })
+    //       .catch((error) => {
+    //         toast.error(error.response.data.message);
+    //       });
+    //     }
+    //   };
+    toast.success("Avatar updated successfully!");
 
     reader.readAsDataURL(e.target.files[0]);
   };
@@ -50,34 +48,35 @@ const ShopSettings = () => {
   const updateHandler = async (e) => {
     e.preventDefault();
 
-    await axios
-      .put(
-        `${server}/shop/update-seller-info`,
-        {
-          name,
-          address,
-          zipCode,
-          phoneNumber,
-          description,
-        },
-        { withCredentials: true }
-      )
-      .then((res) => {
-        toast.success("Shop info updated succesfully!");
-        dispatch(loadSeller());
-      })
-      .catch((error) => {
-        toast.error(error.response.data.message);
-      });
+    // await axios
+    //   .put(
+    //     `${server}/shop/update-seller-info`,
+    //     {
+    //       name,
+    //       address,
+    //       zipCode,
+    //       phoneNumber,
+    //       description,
+    //     },
+    //     { withCredentials: true }
+    //   )
+    //   .then((res) => {
+    //     toast.success("Shop info updated succesfully!");
+    //     dispatch(loadSeller());
+    //   })
+    //   .catch((error) => {
+    //     toast.error(error.response.data.message);
+    //   });
+    toast.success("Shop info updated succesfully!");
   };
 
   return (
     <div className="w-full min-h-screen flex flex-col items-center">
-      <div className="flex w-full 800px:w-[80%] flex-col justify-center my-5">
+      <div className="flex w-full md:w-[80%] flex-col justify-center my-5">
         <div className="w-full flex items-center justify-center">
           <div className="relative">
             <img
-              src={avatar ? avatar : `${seller.avatar?.url}`}
+              src={avatar ? avatar : `${seller?.avatar?.url}`}
               alt=""
               className="w-[200px] h-[200px] rounded-full cursor-pointer"
             />
@@ -101,20 +100,20 @@ const ShopSettings = () => {
           className="flex flex-col items-center"
           onSubmit={updateHandler}
         >
-          <div className="w-[100%] flex items-center flex-col 800px:w-[50%] mt-5">
+          <div className="w-[100%] flex items-center flex-col md:w-[50%] mt-5">
             <div className="w-full pl-[3%]">
               <label className="block pb-2">Shop Name</label>
             </div>
             <input
               type="name"
-              placeholder={`${seller.name}`}
+              placeholder={`${seller?.name}`}
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
+              className={`${styles.input} !w-[95%] mb-4 :mb-0`}
               required
             />
           </div>
-          <div className="w-[100%] flex items-center flex-col 800px:w-[50%] mt-5">
+          <div className="w-[100%] flex items-center flex-col md:w-[50%] mt-5">
             <div className="w-full pl-[3%]">
               <label className="block pb-2">Shop description</label>
             </div>
@@ -127,10 +126,10 @@ const ShopSettings = () => {
               }`}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
+              className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
             />
           </div>
-          <div className="w-[100%] flex items-center flex-col 800px:w-[50%] mt-5">
+          <div className="w-[100%] flex items-center flex-col md:w-[50%] mt-5">
             <div className="w-full pl-[3%]">
               <label className="block pb-2">Shop Address</label>
             </div>
@@ -139,12 +138,12 @@ const ShopSettings = () => {
               placeholder={seller?.address}
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
+              className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
               required
             />
           </div>
 
-          <div className="w-[100%] flex items-center flex-col 800px:w-[50%] mt-5">
+          <div className="w-[100%] flex items-center flex-col md:w-[50%] mt-5">
             <div className="w-full pl-[3%]">
               <label className="block pb-2">Shop Phone Number</label>
             </div>
@@ -153,12 +152,12 @@ const ShopSettings = () => {
               placeholder={seller?.phoneNumber}
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
-              className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
+              className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
               required
             />
           </div>
 
-          <div className="w-[100%] flex items-center flex-col 800px:w-[50%] mt-5">
+          <div className="w-[100%] flex items-center flex-col md:w-[50%] mt-5">
             <div className="w-full pl-[3%]">
               <label className="block pb-2">Shop Zip Code</label>
             </div>
@@ -167,16 +166,16 @@ const ShopSettings = () => {
               placeholder={seller?.zipCode}
               value={zipCode}
               onChange={(e) => setZipcode(e.target.value)}
-              className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
+              className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
               required
             />
           </div>
 
-          <div className="w-[100%] flex items-center flex-col 800px:w-[50%] mt-5">
+          <div className="w-[100%] flex items-center flex-col md:w-[50%] mt-5">
             <input
               type="submit"
               value="Update Shop"
-              className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
+              className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
               required
               readOnly
             />

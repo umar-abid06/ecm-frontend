@@ -1,21 +1,23 @@
-import { Button } from "@material-ui/core";
-import { DataGrid } from "@material-ui/data-grid";
+import Button from "@mui/material/Button";
+import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Loader from "../Layout/Loader";
-import { getAllOrdersOfShop } from "../../redux/actions/order";
+
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { useStore } from "../../store";
+import LoadingComponent from "../LoadingComponent";
 
 const AllOrders = () => {
-  const { orders, isLoading } = useSelector((state) => state.order);
-  const { seller } = useSelector((state) => state.seller);
-
-  const dispatch = useDispatch();
+  const {
+    seller,
+    orders,
+    isShopLoading: isLoading,
+    getAllOrdersOfShop,
+  } = useStore();
 
   useEffect(() => {
-    dispatch(getAllOrdersOfShop(seller._id));
-  }, [dispatch]);
+    getAllOrdersOfShop(seller?.id);
+  }, []);
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
@@ -83,7 +85,7 @@ const AllOrders = () => {
   return (
     <>
       {isLoading ? (
-        <Loader />
+        <LoadingComponent />
       ) : (
         <div className="w-full mx-8 pt-1 mt-10 bg-white">
           <DataGrid

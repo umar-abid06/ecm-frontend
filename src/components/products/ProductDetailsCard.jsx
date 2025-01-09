@@ -47,7 +47,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
   };
 
   useEffect(() => {
-    if (wishlist && wishlist.find((i) => i._id === data._id)) {
+    if (wishlist && wishlist.find((i) => i?.id === data?.id)) {
       setClick(true);
     } else {
       setClick(false);
@@ -68,20 +68,23 @@ const ProductDetailsCard = ({ setOpen, data }) => {
     <div className="bg-[#fff]">
       {data ? (
         <div className="fixed w-full h-screen top-0 left-0 bg-[#00000030] z-40 flex items-center justify-center">
-          <div className="w-[90%] 800px:w-[60%] h-[90vh] overflow-y-scroll 800px:h-[75vh] bg-white rounded-md shadow-sm relative p-4">
+          <div className="w-[90%] md:w-[60%] h-[90vh] overflow-y-scroll md:h-[75vh] bg-white rounded-md shadow-sm relative p-4">
             <RxCross1
               size={30}
               className="absolute right-3 top-3 z-50"
               onClick={() => setOpen(false)}
             />
 
-            <div className="block w-full 800px:flex">
-              <div className="w-full 800px:w-[50%]">
-                <img src={`${data.images && data.images[0]?.url}`} alt="" />
+            <div className="block w-full md:flex">
+              <div className="w-full md:w-[50%]">
+                <img
+                  src={`${data.image_Url && data.image_Url[0]?.url}`}
+                  alt=""
+                />
                 <div className="flex">
                   <Link to={`/shop/preview/${data.shop._id}`} className="flex">
                     <img
-                      src={`${data.images && data.images[0]?.url}`}
+                      src={`${data.image_Url && data.image_Url[0]?.url}`}
                       alt=""
                       className="w-[50px] h-[50px] rounded-full mr-2"
                     />
@@ -106,7 +109,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                 <h5 className="text-[16px] text-[red] mt-5">(50) Sold out</h5>
               </div>
 
-              <div className="w-full 800px:w-[50%] pt-5 pl-[5px] pr-[5px]">
+              <div className="w-full md:w-[50%] pt-5 pl-[5px] pr-[5px]">
                 <h1 className={`${styles.productTitle} text-[20px]`}>
                   {data.name}
                 </h1>
@@ -114,7 +117,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 
                 <div className="flex pt-3">
                   <h4 className={`${styles.productDiscountPrice}`}>
-                    {data.discountPrice}$
+                    {data.discount_price}$
                   </h4>
                   <h3 className={`${styles.price}`}>
                     {data.originalPrice ? data.originalPrice + "$" : null}

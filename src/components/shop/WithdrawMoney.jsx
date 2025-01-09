@@ -117,7 +117,7 @@ const WithdrawMoney = () => {
       {open && (
         <div className="w-full h-screen z-[9999] fixed top-0 left-0 flex items-center justify-center bg-[#0000004e]">
           <div
-            className={`w-[95%] 800px:w-[50%] bg-white shadow rounded ${
+            className={`w-[95%] md:w-[50%] bg-white shadow rounded ${
               paymentMethod ? "h-[80vh] overflow-y-scroll" : "h-[unset]"
             } min-h-[40vh] p-3`}
           >
@@ -271,8 +271,8 @@ const WithdrawMoney = () => {
 
                 {seller && seller?.withdrawMethod ? (
                   <div>
-                    <div className="800px:flex w-full justify-between items-center">
-                      <div className="800px:w-[50%]">
+                    <div className="md:flex w-full justify-between items-center">
+                      <div className="md:w-[50%]">
                         <h5>
                           Account Number:{" "}
                           {"*".repeat(
@@ -282,7 +282,7 @@ const WithdrawMoney = () => {
                         </h5>
                         <h5>Bank Name: {seller?.withdrawMethod.bankName}</h5>
                       </div>
-                      <div className="800px:w-[50%]">
+                      <div className="md:w-[50%]">
                         <AiOutlineDelete
                           size={25}
                           className="cursor-pointer"
@@ -293,13 +293,13 @@ const WithdrawMoney = () => {
                     <br />
                     <h4>Available Balance: {availableBalance}$</h4>
                     <br />
-                    <div className="800px:flex w-full items-center">
+                    <div className="md:flex w-full items-center">
                       <input
                         type="number"
                         placeholder="Amount..."
                         value={withdrawAmount}
                         onChange={(e) => setWithdrawAmount(e.target.value)}
-                        className="800px:w-[100px] w-[full] border 800px:mr-3 p-1 rounded"
+                        className="md:w-[100px] w-[full] border md:mr-3 p-1 rounded"
                       />
                       <div
                         className={`${styles.button} !h-[42px] text-white`}

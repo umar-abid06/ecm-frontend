@@ -60,7 +60,7 @@ const ProductCard = ({ data, isEvent }) => {
           to={`${
             isEvent === true
               ? `/product/${data._id}?isEvent=true`
-              : `/product/${data._id}`
+              : `/product/${data.id}`
           }`}
         >
           {/* <img

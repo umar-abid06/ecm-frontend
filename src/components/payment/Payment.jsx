@@ -182,8 +182,8 @@ const Payment = () => {
 
   return (
     <div className="w-full flex flex-col items-center py-8">
-      <div className="w-[90%] 1000px:w-[70%] block 800px:flex">
-        <div className="w-full 800px:w-[65%]">
+      <div className="w-[90%] md:w-[70%] block md:flex">
+        <div className="w-full md:w-[65%]">
           <PaymentInfo
             user={user}
             open={open}
@@ -194,7 +194,7 @@ const Payment = () => {
             cashOnDeliveryHandler={cashOnDeliveryHandler}
           />
         </div>
-        <div className="w-full 800px:w-[35%] 800px:mt-0 mt-8">
+        <div className="w-full md:w-[35%] md:mt-0 mt-8">
           <CartData orderData={orderData} />
         </div>
       </div>
@@ -214,7 +214,7 @@ const PaymentInfo = ({
   const [select, setSelect] = useState(1);
 
   return (
-    <div className="w-full 800px:w-[95%] bg-[#fff] rounded-md p-5 pb-8">
+    <div className="w-full md:w-[95%] bg-[#fff] rounded-md p-5 pb-8">
       {/* select buttons */}
       <div>
         <div className="flex w-full pb-5 border-b mb-2">
@@ -353,7 +353,7 @@ const PaymentInfo = ({
             </div>
             {open && (
               <div className="w-full fixed top-0 left-0 bg-[#00000039] h-screen flex items-center justify-center z-[99999]">
-                <div className="w-full 800px:w-[40%] h-screen 800px:h-[80vh] bg-white rounded-[5px] shadow flex flex-col justify-center p-8 relative overflow-y-scroll">
+                <div className="w-full md:w-[40%] h-screen md:h-[80vh] bg-white rounded-[5px] shadow flex flex-col justify-center p-8 relative overflow-y-scroll">
                   <div className="w-full flex justify-end p-3">
                     <RxCross1
                       size={30}
