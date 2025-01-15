@@ -1,16 +1,15 @@
-import { Button } from "@material-ui/core";
-import { DataGrid } from "@material-ui/data-grid";
-import axios from "axios";
+import Button from "@mui/material/Button";
+import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
-import { useDispatch, useSelector } from "react-redux";
 import styles from "../../styles/styles";
-import Loader from "../Layout/Loader";
-import { server } from "../../server";
 import { toast } from "react-toastify";
+import LoadingComponent from "../LoadingComponent";
+import { useStore } from "../../store";
 
 const AllCoupons = () => {
+  const { seller, products } = useStore();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -19,59 +18,55 @@ const AllCoupons = () => {
   const [maxAmount, setMaxAmount] = useState(null);
   const [selectedProducts, setSelectedProducts] = useState(null);
   const [value, setValue] = useState(null);
-  const { seller } = useSelector((state) => state.seller);
-  const { products } = useSelector((state) => state.products);
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    setIsLoading(true);
-    axios
-      .get(`${server}/coupon/get-coupon/${seller._id}`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        setIsLoading(false);
-        setCoupouns(res.data.couponCodes);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-      });
-  }, [dispatch]);
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   axios
+  //     .get(`${server}/coupon/get-coupon/${seller._id}`, {
+  //       withCredentials: true,
+  //     })
+  //     .then((res) => {
+  //       setIsLoading(false);
+  //       setCoupouns(res.data.couponCodes);
+  //     })
+  //     .catch((error) => {
+  //       setIsLoading(false);
+  //     });
+  // }, [dispatch]);
 
   const handleDelete = async (id) => {
-    axios
-      .delete(`${server}/coupon/delete-coupon/${id}`, { withCredentials: true })
-      .then((res) => {
-        toast.success("Coupon code deleted succesfully!");
-      });
+    // axios
+    //   .delete(`${server}/coupon/delete-coupon/${id}`, { withCredentials: true })
+    //   .then((res) => {
+    //     toast.success("Coupon code deleted succesfully!");
+    //   });
     window.location.reload();
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await axios
-      .post(
-        `${server}/coupon/create-coupon-code`,
-        {
-          name,
-          minAmount,
-          maxAmount,
-          selectedProducts,
-          value,
-          shopId: seller._id,
-        },
-        { withCredentials: true }
-      )
-      .then((res) => {
-        toast.success("Coupon code created successfully!");
-        setOpen(false);
-        window.location.reload();
-      })
-      .catch((error) => {
-        toast.error(error.response.data.message);
-      });
+    // await axios
+    //   .post(
+    //     `${server}/coupon/create-coupon-code`,
+    //     {
+    //       name,
+    //       minAmount,
+    //       maxAmount,
+    //       selectedProducts,
+    //       value,
+    //       shopId: seller._id,
+    //     },
+    //     { withCredentials: true }
+    //   )
+    //   .then((res) => {
+    //     toast.success("Coupon code created successfully!");
+    //     setOpen(false);
+    //     window.location.reload();
+    //   })
+    //   .catch((error) => {
+    //     toast.error(error.response.data.message);
+    //   });
   };
 
   const columns = [
@@ -122,7 +117,7 @@ const AllCoupons = () => {
   return (
     <>
       {isLoading ? (
-        <Loader />
+        <LoadingComponent />
       ) : (
         <div className="w-full mx-8 pt-1 mt-10 bg-white">
           <div className="w-full flex justify-end">

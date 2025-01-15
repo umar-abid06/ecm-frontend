@@ -4,14 +4,12 @@ import { Link, useParams } from "react-router-dom";
 import { getAllProductsShop } from "../../redux/actions/product";
 import styles from "../../styles/styles";
 import ProductCard from "../Route/ProductCard/ProductCard";
-import Ratings from "../Products/Ratings";
-import { getAllEventsShop } from "../../redux/actions/event";
+import { Ratings } from "../products";
+import { useStore } from "../../store";
 
 const ShopProfileData = ({ isOwner }) => {
-  const { products } = useSelector((state) => state.products);
-  const { events } = useSelector((state) => state.events);
+  const { products, events } = useStore();
   const { id } = useParams();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllProductsShop(id));

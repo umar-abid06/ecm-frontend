@@ -1,27 +1,27 @@
-import { Button } from "@material-ui/core";
-import { DataGrid } from "@material-ui/data-grid";
+import Button from "@mui/material/Button";
+import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Loader from "../Layout/Loader";
-import { getAllOrdersOfShop } from "../../redux/actions/order";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import LoadingComponent from "../LoadingComponent";
+import { useStore } from "../../store";
 
 const AllRefundOrders = () => {
-  const { orders, isLoading } = useSelector((state) => state.order);
-  const { seller } = useSelector((state) => state.seller);
+  const { orders, isLoading, seller } = useStore();
 
-  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(getAllOrdersOfShop(seller._id));
+  // }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(getAllOrdersOfShop(seller._id));
-  }, [dispatch]);
-
-  const refundOrders = orders && orders.filter((item) => item.status === "Processing refund"  || item.status === "Refund Success");
+  const refundOrders =
+    orders &&
+    orders.filter(
+      (item) =>
+        item.status === "Processing refund" || item.status === "Refund Success"
+    );
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
-
     {
       field: "status",
       headerName: "Status",
@@ -73,7 +73,7 @@ const AllRefundOrders = () => {
   const row = [];
 
   refundOrders &&
-  refundOrders.forEach((item) => {
+    refundOrders.forEach((item) => {
       row.push({
         id: item._id,
         itemsQty: item.cart.length,
@@ -85,7 +85,7 @@ const AllRefundOrders = () => {
   return (
     <>
       {isLoading ? (
-        <Loader />
+        <LoadingComponent />
       ) : (
         <div className="w-full mx-8 pt-1 mt-10 bg-white">
           <DataGrid

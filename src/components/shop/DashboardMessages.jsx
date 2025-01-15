@@ -1,19 +1,18 @@
-import axios from "axios";
 import React, { useRef, useState } from "react";
 import { useEffect } from "react";
-import { server } from "../../server";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowRight, AiOutlineSend } from "react-icons/ai";
 import styles from "../../styles/styles";
 import { TfiGallery } from "react-icons/tfi";
-import socketIO from "socket.io-client";
-import { format } from "timeago.js";
-const ENDPOINT = "https://socket-ecommerce-tu68.onrender.com/";
-const socketId = socketIO(ENDPOINT, { transports: ["websocket"] });
+import { useStore } from "../../store";
+// import socketIO from "socket.io-client";
+// import { format } from "timeago.js";
+
+// const ENDPOINT = "https://socket-ecommerce-tu68.onrender.com/";
+// const socketId = socketIO(ENDPOINT, { transports: ["websocket"] });
 
 const DashboardMessages = () => {
-  const { seller,isLoading } = useSelector((state) => state.seller);
+  const { seller, isLoading } = useStore();
   const [conversations, setConversations] = useState([]);
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [currentChat, setCurrentChat] = useState();
@@ -26,15 +25,15 @@ const DashboardMessages = () => {
   const [open, setOpen] = useState(false);
   const scrollRef = useRef(null);
 
-  useEffect(() => {
-    socketId.on("getMessage", (data) => {
-      setArrivalMessage({
-        sender: data.senderId,
-        text: data.text,
-        createdAt: Date.now(),
-      });
-    });
-  }, []);
+  // useEffect(() => {
+  //   socketId.on("getMessage", (data) => {
+  //     setArrivalMessage({
+  //       sender: data.senderId,
+  //       text: data.text,
+  //       createdAt: Date.now(),
+  //     });
+  //   });
+  // }, []);
 
   useEffect(() => {
     arrivalMessage &&
@@ -42,33 +41,33 @@ const DashboardMessages = () => {
       setMessages((prev) => [...prev, arrivalMessage]);
   }, [arrivalMessage, currentChat]);
 
-  useEffect(() => {
-    const getConversation = async () => {
-      try {
-        const resonse = await axios.get(
-          `${server}/conversation/get-all-conversation-seller/${seller?._id}`,
-          {
-            withCredentials: true,
-          }
-        );
+  // useEffect(() => {
+  //   const getConversation = async () => {
+  //     try {
+  //       const resonse = await axios.get(
+  //         `${server}/conversation/get-all-conversation-seller/${seller?._id}`,
+  //         {
+  //           withCredentials: true,
+  //         }
+  //       );
 
-        setConversations(resonse.data.conversations);
-      } catch (error) {
-        // console.log(error);
-      }
-    };
-    getConversation();
-  }, [seller, messages]);
+  //       setConversations(resonse.data.conversations);
+  //     } catch (error) {
+  //       // console.log(error);
+  //     }
+  //   };
+  //   getConversation();
+  // }, [seller, messages]);
 
-  useEffect(() => {
-    if (seller) {
-      const sellerId = seller?._id;
-      socketId.emit("addUser", sellerId);
-      socketId.on("getUsers", (data) => {
-        setOnlineUsers(data);
-      });
-    }
-  }, [seller]);
+  // useEffect(() => {
+  //   if (seller) {
+  //     const sellerId = seller?._id;
+  //     socketId.emit("addUser", sellerId);
+  //     socketId.on("getUsers", (data) => {
+  //       setOnlineUsers(data);
+  //     });
+  //   }
+  // }, [seller]);
 
   const onlineCheck = (chat) => {
     const chatMembers = chat.members.find((member) => member !== seller?._id);
@@ -106,11 +105,11 @@ const DashboardMessages = () => {
       (member) => member.id !== seller._id
     );
 
-    socketId.emit("sendMessage", {
-      senderId: seller._id,
-      receiverId,
-      text: newMessage,
-    });
+    // socketId.emit("sendMessage", {
+    //   senderId: seller._id,
+    //   receiverId,
+    //   text: newMessage,
+    // });
 
     try {
       if (newMessage !== "") {
@@ -130,23 +129,22 @@ const DashboardMessages = () => {
   };
 
   const updateLastMessage = async () => {
-    socketId.emit("updateLastMessage", {
-      lastMessage: newMessage,
-      lastMessageId: seller._id,
-    });
-
-    await axios
-      .put(`${server}/conversation/update-last-message/${currentChat._id}`, {
-        lastMessage: newMessage,
-        lastMessageId: seller._id,
-      })
-      .then((res) => {
-        console.log(res.data.conversation);
-        setNewMessage("");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // socketId.emit("updateLastMessage", {
+    //   lastMessage: newMessage,
+    //   lastMessageId: seller._id,
+    // });
+    // await axios
+    //   .put(`${server}/conversation/update-last-message/${currentChat._id}`, {
+    //     lastMessage: newMessage,
+    //     lastMessageId: seller._id,
+    //   })
+    //   .then((res) => {
+    //     console.log(res.data.conversation);
+    //     setNewMessage("");
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
   const handleImageUpload = async (e) => {
@@ -167,28 +165,28 @@ const DashboardMessages = () => {
       (member) => member !== seller._id
     );
 
-    socketId.emit("sendMessage", {
-      senderId: seller._id,
-      receiverId,
-      images: e,
-    });
+    // socketId.emit("sendMessage", {
+    //   senderId: seller._id,
+    //   receiverId,
+    //   images: e,
+    // });
 
-    try {
-      await axios
-        .post(`${server}/message/create-new-message`, {
-          images: e,
-          sender: seller._id,
-          text: newMessage,
-          conversationId: currentChat._id,
-        })
-        .then((res) => {
-          setImages();
-          setMessages([...messages, res.data.message]);
-          updateLastMessageForImage();
-        });
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   await axios
+    //     .post(`${server}/message/create-new-message`, {
+    //       images: e,
+    //       sender: seller._id,
+    //       text: newMessage,
+    //       conversationId: currentChat._id,
+    //     })
+    //     .then((res) => {
+    //       setImages();
+    //       setMessages([...messages, res.data.message]);
+    //       updateLastMessageForImage();
+    //     });
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   const updateLastMessageForImage = async () => {
@@ -260,7 +258,7 @@ const MessageList = ({
   setUserData,
   online,
   setActiveStatus,
-  isLoading
+  isLoading,
 }) => {
   console.log(data);
   const [user, setUser] = useState([]);
@@ -392,7 +390,7 @@ const SellerInbox = ({
                     </div>
 
                     <p className="text-[12px] text-[#000000d3] pt-1">
-                      {format(item.createdAt)}
+                      {/* {format(item.createdAt)} */}
                     </p>
                   </div>
                 )}

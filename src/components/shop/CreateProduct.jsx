@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createProduct } from "../../redux/actions/product";
-import { categoriesData } from "../../static/data";
 import { toast } from "react-toastify";
+import { categoriesData } from "../../static/data";
+import { useStore } from "../../store";
+import { PATHS } from "../../utils/paths";
 
 const CreateProduct = () => {
-  const { seller } = useSelector((state) => state.seller);
-  const { success, error } = useSelector((state) => state.products);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const { seller, addProducts: createProduct } = useStore();
 
+  const navigate = useNavigate();
+
+  const [success, setSuccess] = useState();
+  const [error, setError] = useState();
   const [images, setImages] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -27,10 +28,10 @@ const CreateProduct = () => {
     }
     if (success) {
       toast.success("Product created successfully!");
-      navigate("/dashboard");
+      navigate(PATHS.APP.SHOP_DASHBOARD);
       window.location.reload();
     }
-  }, [dispatch, error, success]);
+  }, [error, success]);
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
@@ -64,20 +65,22 @@ const CreateProduct = () => {
     newForm.append("originalPrice", originalPrice);
     newForm.append("discountPrice", discountPrice);
     newForm.append("stock", stock);
-    newForm.append("shopId", seller._id);
-    dispatch(
-      createProduct({
-        name,
-        description,
-        category,
-        tags,
-        originalPrice,
-        discountPrice,
-        stock,
-        shopId: seller._id,
-        images,
-      })
-    );
+    newForm.append("shopId", seller?.id);
+
+    createProduct({
+      name,
+      description,
+      category,
+      tags,
+      originalPrice,
+      discountPrice,
+      stock,
+      shopId: seller?.id,
+      images,
+    });
+    // To be changed
+    setSuccess(true);
+    setError(false);
   };
 
   return (
@@ -193,7 +196,8 @@ const CreateProduct = () => {
             Upload Images <span className="text-red-500">*</span>
           </label>
           <input
-            type="file"
+            typ
+            e="file"
             name=""
             id="upload"
             className="hidden"

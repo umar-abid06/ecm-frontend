@@ -4,21 +4,17 @@ import styles from "../../styles/styles";
 import { Link } from "react-router-dom";
 import { MdBorderClear } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllOrdersOfShop } from "../../redux/actions/order";
-import { getAllProductsShop } from "../../redux/actions/product";
-import { Button } from "@material-ui/core";
-import { DataGrid } from "@material-ui/data-grid";
+import Button from "@mui/material/Button";
+import { DataGrid } from "@mui/x-data-grid";
+import { useStore } from "../../store";
+import { PATHS } from "../../utils/paths";
 
 const DashboardHero = () => {
-  const dispatch = useDispatch();
-  const { orders } = useSelector((state) => state.order);
-  const { seller } = useSelector((state) => state.seller);
-  const { products } = useSelector((state) => state.products);
-
-  useEffect(() => {
-    dispatch(getAllOrdersOfShop(seller._id));
-    dispatch(getAllProductsShop(seller._id));
-  }, [dispatch]);
+  const { orders, seller, products } = useStore();
+  // useEffect(() => {
+  //   dispatch(getAllOrdersOfShop(seller._id));
+  //   dispatch(getAllProductsShop(seller._id));
+  // }, [dispatch]);
 
   const availableBalance = seller?.availableBalance.toFixed(2);
 
@@ -105,7 +101,7 @@ const DashboardHero = () => {
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">
             ${availableBalance}
           </h5>
-          <Link to="/dashboard-withdraw-money">
+          <Link to={PATHS.APP.SHOP_DASHBOARD_WITHDRAW_MONEY}>
             <h5 className="pt-4 pl-[2] text-[#077f9c]">Withdraw Money</h5>
           </Link>
         </div>
@@ -122,7 +118,7 @@ const DashboardHero = () => {
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">
             {orders && orders.length}
           </h5>
-          <Link to="/dashboard-orders">
+          <Link to={PATHS.APP.SHOP_DASHBOARD_ORDERS}>
             <h5 className="pt-4 pl-2 text-[#077f9c]">View Orders</h5>
           </Link>
         </div>
@@ -143,7 +139,7 @@ const DashboardHero = () => {
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">
             {products && products.length}
           </h5>
-          <Link to="/dashboard-products">
+          <Link to={PATHS.APP.SHOP_DASHBOARD_PRODUCTS}>
             <h5 className="pt-4 pl-2 text-[#077f9c]">View Products</h5>
           </Link>
         </div>
