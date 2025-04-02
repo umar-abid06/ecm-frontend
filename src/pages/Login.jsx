@@ -1,20 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { loginValidationSchema } from "../utils/validationSchema.js";
 import useAuth from "../hooks/useAuth.js";
 import AuthForm from "../components/auth/AuthForm.jsx";
 import { toast } from "react-toastify";
+import { useStore } from "../store/index.js";
 
 const Login = () => {
   const { login } = useAuth();
+  const { emailCheckMsg } = useStore();
 
   const handleLoginSubmit = async (data, reset) => {
     try {
       // Call the login function from the useAuth hook with credentials
       const response = await login(data);
-      console.log("Resp in Login", response);
+      // console.log("Resp in Login", response);
 
       if (response.status === "ERROR") {
-        toast.error(response.message);
+        toast.error(response?.message);
         // Reset the form fields on error
         reset();
       } else {
@@ -31,7 +33,15 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-200 pb-32">
+    <div className="flex flex-col items-center justify-evenly min-h-screen bg-gray-200 pb-32">
+      {emailCheckMsg && (
+        <div
+          className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-5 w-full max-w-sm mx-auto"
+          role="alert"
+        >
+          <strong className="font-bold">{emailCheckMsg}</strong>
+        </div>
+      )}
       <AuthForm
         validationSchema={loginValidationSchema}
         onSubmitHandler={handleLoginSubmit}

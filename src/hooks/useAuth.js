@@ -1,11 +1,10 @@
 // src/hooks/useAuth.js
-import { useEffect } from "react";
 import useAuthStore from "../store/auth/authStore";
 import { requestApi } from "../api/requestApi";
 import { ENDPOINTS } from "../api/endpoints";
 
 const useAuth = () => {
-  const { setUserAuthentication } = useAuthStore();
+  const { setUserAuthentication, setEmailCheckMsg } = useAuthStore();
 
   const login = async (credentials) => {
     try {
@@ -21,6 +20,7 @@ const useAuth = () => {
 
   const logout = () => {
     setUserAuthentication(false);
+    setEmailCheckMsg(null); // Clear email check message
   };
 
   // Register function (newly added)
@@ -32,11 +32,11 @@ const useAuth = () => {
         "post",
         credentials
       );
-      console.log("Regis Authform", response);
+      // console.log("Regis Authform", response);
 
       return response;
     } catch (error) {
-      console.error("Registration error:", error);
+      // console.error("Registration error:", error);
       return error;
     }
   };

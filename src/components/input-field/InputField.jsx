@@ -1,7 +1,6 @@
 // src/components/InputField.js
 import { useController } from "react-hook-form";
 import BasicTextInput from "../inputs/BasicTextInput.jsx";
-import { useCallback } from "react";
 
 function InputField({
   trigger = "onChange", // Default to onChange for event triggers

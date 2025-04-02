@@ -1,12 +1,12 @@
 // src/components/auth/AuthForm.js
 
+import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import InputField from "../input-field/InputField.jsx"; // Reusable InputField component
-import { FaEye, FaEyeSlash, FaEnvelope, FaLock, FaUser } from "react-icons/fa";
+import { FaEnvelope, FaEye, FaEyeSlash, FaLock, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { ENDPOINTS } from "../../api/endpoints.js";
+import { PATHS } from "../../utils/paths.js";
+import InputField from "../input-field/InputField.jsx"; // Reusable InputField component
 
 const AuthForm = ({
   validationSchema,
@@ -151,7 +151,7 @@ const AuthForm = ({
           <span className="text-sm text-gray-600">
             Already have an account?{" "}
             <Link
-              to={ENDPOINTS.LOGIN}
+              to={PATHS.AUTH.LOGIN}
               className="text-blue-500 hover:underline transition duration-200"
             >
               Log In
@@ -163,7 +163,7 @@ const AuthForm = ({
           <span className="text-sm text-gray-600">
             Don't have an account?{" "}
             <Link
-              to={ENDPOINTS.REGISTER}
+              to={PATHS.AUTH.REGISTER}
               className="text-blue-500 hover:underline transition duration-200"
             >
               Register

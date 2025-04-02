@@ -16,6 +16,8 @@ const useAuthStore = create(
       // isAuth: Boolean(getItem(STORAGE_KEYS.AUTH_TOKEN)),
       isAuth: false,
       userData: null,
+      emailCheckMsg: null,
+      setEmailCheckMsg: (value) => set({ emailCheckMsg: value }),
 
       setUserAuthentication: (isAuth = false, data) => {
         // if (data) {

@@ -1,7 +1,11 @@
 export const ENDPOINTS = {
   //auth
-  LOGIN: "/auth/login",
-  REGISTER: "/auth/register",
+  // LOGIN: "/auth/login",
+  // REGISTER: "/auth/register",
+  // REFRESH_TOKEN: "/auth/refresh-token",
+  // USER_PROFILE: "/user/profile",
+  LOGIN: "/profile/login",
+  REGISTER: "/profile/create-profile",
   REFRESH_TOKEN: "/auth/refresh-token",
   USER_PROFILE: "/user/profile",
 

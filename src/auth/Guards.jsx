@@ -3,13 +3,14 @@ import { useStore } from "../store";
 import { PATHS } from "../utils/paths";
 
 export const AuthGuard = ({ children }) => {
-  // const { isAuth } = useStore(); // Access authentication state using the custom hook
-  const isAuth = true;
+  const { isAuth } = useStore(); // Access authentication state using the custom hook
+  // const isAuth = true;
+  console.log(isAuth);
   return isAuth ? children : <Navigate to={PATHS.AUTH.LOGIN} />; // Redirect to login if not authenticated
 };
 export const GuestGuard = ({ children }) => {
-  // const { isAuth } = useStore(); // Access authentication state using the custom hook
-  const isAuth = true;
+  const { isAuth } = useStore(); // Access authentication state using the custom hook
+  // const isAuth = true;
   return !isAuth ? children : <Navigate to={PATHS.APP.HOME} />; // Redirect to home if already authenticated
 };
 export const SellerGuard = ({ children }) => {
