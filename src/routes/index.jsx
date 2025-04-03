@@ -5,6 +5,7 @@ import {
   Home,
   Login,
   Register,
+  Activation,
   BestSelling,
   Products,
   Events,
@@ -57,6 +58,14 @@ const AppRoutes = () => {
       element: (
         <GuestGuard>
           <Register />
+        </GuestGuard>
+      ),
+    },
+    {
+      path: PATHS.AUTH.ACTIVATION,
+      element: (
+        <GuestGuard>
+          <Activation />
         </GuestGuard>
       ),
     },

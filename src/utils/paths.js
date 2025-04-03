@@ -10,6 +10,7 @@ export const PATHS = {
   AUTH: {
     LOGIN: path(ROOTS_AUTH, "/login"),
     REGISTER: path(ROOTS_AUTH, "/register"),
+    ACTIVATION: path(ROOTS_AUTH, "/activation"),
   },
   APP: {
     HOME: path(ROOTS_APP, ""),

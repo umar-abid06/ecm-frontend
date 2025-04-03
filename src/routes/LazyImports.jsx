@@ -5,8 +5,9 @@ import Loadable from "./Loadable.jsx";
 export const Home = Loadable(lazy(() => import("../pages/Home")));
 export const BestSelling = Loadable(lazy(() => import("../pages/BestSelling")));
 export const Login = Loadable(lazy(() => import("../pages/Login")));
-export const FAQ = Loadable(lazy(() => import("../pages/FAQ")));
 export const Register = Loadable(lazy(() => import("../pages/Register")));
+export const Activation = Loadable(lazy(() => import("../pages/Activation")));
+export const FAQ = Loadable(lazy(() => import("../pages/FAQ")));
 export const Products = Loadable(lazy(() => import("../pages/Products")));
 export const ProductDetails = Loadable(
   lazy(() => import("../pages/ProductDetails"))
