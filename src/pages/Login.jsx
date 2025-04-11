@@ -1,34 +1,42 @@
-import React, { useState } from "react";
-import { loginValidationSchema } from "../utils/validationSchema.js";
-import useAuth from "../hooks/useAuth.js";
-import AuthForm from "../components/auth/AuthForm.jsx";
 import { toast } from "react-toastify";
 import { useStore } from "../store/index.js";
+import { loginValidationSchema } from "../utils/validationSchema.js";
+import AuthForm from "../components/auth/AuthForm.jsx";
+import useAuth from "../hooks/useAuth.js";
 
 const Login = () => {
   const { login } = useAuth();
   const { emailCheckMsg } = useStore();
 
+  // const handleLoginSubmit = async (data, reset) => {
+  //   try {
+  //     const response = await login(data);
+  //     console.log("Login response:", response);
+  //     if (response.status === httpCodes[400]) {
+  //       toast.error(response?.message);
+  //       reset();
+  //     } else {
+  //       toast.success(response?.message);
+  //       reset();
+  //     }
+  //   } catch (err) {
+  //     toast.error("Login failed. Please try again.");
+  //     reset();
+  //   }
+  // };
+
   const handleLoginSubmit = async (data, reset) => {
     try {
-      // Call the login function from the useAuth hook with credentials
       const response = await login(data);
-      // console.log("Resp in Login", response);
-
-      if (response.status === "ERROR") {
-        toast.error(response?.message);
-        // Reset the form fields on error
-        reset();
-      } else {
-        toast.success(response?.message);
-        // Optionally clear the form on successful login (if you need to)
-        reset();
-      }
+      toast.success(response.message);
+      reset();
     } catch (err) {
-      console.error("Login error:", err);
-      // Show the error and reset the form
-      toast.error("Login failed. Please try again.");
-      reset(); // Reset the form after the error
+      if (err.status === 400) {
+        toast.error(err.message);
+      } else {
+        toast.error("Login failed. Please try again.");
+      }
+      reset();
     }
   };
 

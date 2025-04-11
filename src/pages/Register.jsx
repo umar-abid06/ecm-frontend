@@ -1,31 +1,29 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import AuthForm from "../components/auth/AuthForm";
-import useAuth from "../hooks/useAuth";
+import { useStore } from "../store";
 import { PATHS } from "../utils/paths";
 import { registerValidationSchema } from "../utils/validationSchema";
-import { useStore } from "../store";
+import AuthForm from "../components/auth/AuthForm";
+import useAuth from "../hooks/useAuth";
 
 const Register = () => {
-  const { register } = useAuth(); // Assuming you have a register function in useAuth
-  const navigate = useNavigate();
+  const { register } = useAuth();
   const { setEmailCheckMsg } = useStore();
+  const navigate = useNavigate();
 
   const handleRegisterSubmit = async (data) => {
     try {
-      const response = await register(data); // Handle registration logic
+      const response = await register(data);
 
-      if (response.status === "SUCCESS") {
+      if (response.status === 200) {
         toast.success(response?.data?.message);
-        setEmailCheckMsg(response?.data?.message);
         navigate(PATHS.AUTH.LOGIN);
       } else {
-        toast.error(`${response.data.message}
+        toast.error(`${response?.data.message}
     `);
       }
     } catch (err) {
       toast.error(err);
-      // console.error("Registration error:", err);
     }
   };
   return (

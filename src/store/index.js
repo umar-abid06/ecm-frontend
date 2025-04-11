@@ -8,6 +8,7 @@ import { useOrderStore } from "./orders/orderStore";
 import useAuthStore from "./auth/authStore";
 import useLoadingStore from "./loadingStore";
 import { useUserStore } from "./user/userStore";
+import { useCategoryStore } from "./categories/categoryStore";
 
 export const useStore = () => ({
   ...useProductStore(),
@@ -19,4 +20,5 @@ export const useStore = () => ({
   ...useEventStore(),
   ...useOrderStore(),
   ...useUserStore(),
+  ...useCategoryStore(),
 });

@@ -9,6 +9,8 @@ export const ENDPOINTS = {
   REFRESH_TOKEN: "/auth/refresh-token",
   USER_PROFILE: "/user/profile",
 
+  PRODUCT_CATEGORIES: "/categories",
+
   //orders
   GET_ALL_ORDERS: "",
   GET_SELLER_ALL_ORDERS: "",

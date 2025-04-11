@@ -1,44 +1,39 @@
 // src/hooks/useAuth.js
-import useAuthStore from "../store/auth/authStore";
-import { requestApi } from "../api/requestApi";
+import { useMutation } from "@tanstack/react-query";
 import { ENDPOINTS } from "../api/endpoints";
+import { requestApi } from "../api/requestApi";
+import useAuthStore from "../store/auth/authStore";
 
 const useAuth = () => {
   const { setUserAuthentication, setEmailCheckMsg } = useAuthStore();
 
-  const login = async (credentials) => {
-    try {
-      const response = await requestApi(ENDPOINTS.LOGIN, "post", credentials);
-      // console.log("Response in useAuth", response);
-      setUserAuthentication(true, response); // Save token in Zustand and local storage
-      return response;
-    } catch (error) {
-      // console.log("Login failed:", error.data);
-      return error.data;
-    }
-  };
+  const loginMutation = useMutation({
+    mutationFn: (credentials) =>
+      requestApi(ENDPOINTS.LOGIN, "post", credentials),
+    onSuccess: (response) => {
+      setUserAuthentication(true, response);
+    },
+    onError: (error) => {
+      console.error("Login failed:", error);
+    },
+  });
 
+  // Register Mutation
+  const registerMutation = useMutation({
+    mutationFn: (credentials) =>
+      requestApi(ENDPOINTS.REGISTER, "post", credentials),
+    onSuccess: (response) => {
+      setEmailCheckMsg(response?.data?.message);
+    },
+    onError: (error) => {
+      console.error("Registration error:", error);
+    },
+  });
+
+  // Logout Function
   const logout = () => {
     setUserAuthentication(false);
     setEmailCheckMsg(null); // Clear email check message
-  };
-
-  // Register function (newly added)
-  const register = async (credentials) => {
-    try {
-      // Make the API request to register the user
-      const response = await requestApi(
-        ENDPOINTS.REGISTER,
-        "post",
-        credentials
-      );
-      // console.log("Regis Authform", response);
-
-      return response;
-    } catch (error) {
-      // console.error("Registration error:", error);
-      return error;
-    }
   };
 
   // useEffect(() => {
@@ -55,7 +50,13 @@ const useAuth = () => {
   //   if (isAuth) validateToken();
   // }, [isAuth]);
 
-  return { login, logout, register };
+  return {
+    login: loginMutation.mutateAsync,
+    isLoggingIn: loginMutation.isPending,
+    register: registerMutation.mutateAsync,
+    isRegistering: registerMutation.isPending,
+    logout,
+  };
 };
 
 export default useAuth;

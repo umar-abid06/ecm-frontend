@@ -2,9 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { brandingData, categoriesData } from "../../static/data";
 import styles from "../../styles/styles";
+import useCategories from "../../hooks/useCategories";
 
 const Categories = () => {
   const navigate = useNavigate();
+  const { categories } = useCategories();
+  console.log(categories);
   return (
     <>
       <div className={`${styles.section} hidden sm:block`}>
