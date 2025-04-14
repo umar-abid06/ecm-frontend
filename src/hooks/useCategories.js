@@ -1,7 +1,13 @@
-import { useQuery } from "react-query";
-import useCategoryStore from ".../store/categories/categoryStore";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 import { requestApi } from "../api/requestApi";
 import { ENDPOINTS } from "../api/endpoints";
+import { useStore } from "../store";
 
 // Fetch categories from the API using requestApi
 const fetchCategories = async () => {
@@ -15,9 +21,11 @@ const fetchCategories = async () => {
 };
 
 const useCategories = () => {
-  const setCategories = useCategoryStore((state) => state.setCategories);
+  const setCategories = useStore((state) => state.setCategories);
 
-  const { data, error, isLoading } = useQuery("categories", fetchCategories, {
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["categories"],
+    queryFn: fetchCategories,
     onSuccess: (data) => {
       // Store the fetched categories data in Zustand store
       setCategories(data);

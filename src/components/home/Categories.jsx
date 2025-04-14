@@ -1,13 +1,13 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
-import { brandingData, categoriesData } from "../../static/data";
-import styles from "../../styles/styles";
 import useCategories from "../../hooks/useCategories";
+import { brandingData } from "../../static/data";
+import styles from "../../styles/styles";
+import { PATHS } from "../../utils/paths";
 
 const Categories = () => {
   const navigate = useNavigate();
-  const { categories } = useCategories();
-  console.log(categories);
+  const { categories: categoriesData } = useCategories();
+
   return (
     <>
       <div className={`${styles.section} hidden sm:block`}>
@@ -35,7 +35,8 @@ const Categories = () => {
           {categoriesData &&
             categoriesData.map((i) => {
               const handleSubmit = (i) => {
-                navigate(`/products?category=${i.title}`);
+                // navigate(`/products?category=${i.title}`);
+                navigate(`${PATHS.APP.PRODUCTS}?category=${i.title}`);
               };
               return (
                 <div
@@ -45,7 +46,7 @@ const Categories = () => {
                 >
                   <h5 className={`text-[18px] leading-[1.3]`}>{i.title}</h5>
                   <img
-                    src={i.image_Url}
+                    src={i.imageUrl}
                     className="w-[120px] object-cover"
                     alt=""
                   />
