@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AiFillHeart,
-  AiFillStar,
   AiOutlineEye,
   AiOutlineHeart,
   AiOutlineShoppingCart,
-  AiOutlineStar,
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import styles from "../../styles/styles";
-import { ProductDetailsCard, Ratings } from "./";
 import { toast } from "react-toastify";
 import { useStore } from "../../store";
+import styles from "../../styles/styles";
+import { PATHS } from "../../utils/paths";
+import { ProductDetailsCard, Ratings } from "./";
 
 const ProductCard = ({ data, isEvent }) => {
   const { cart, wishlist, addToCart, addToWishlist, removeFromWishlist } =
@@ -51,7 +50,6 @@ const ProductCard = ({ data, isEvent }) => {
       }
     }
   };
-
   return (
     <>
       <div className="w-full h-[370px] bg-white rounded-lg shadow-sm p-3 relative cursor-pointer">
@@ -59,8 +57,8 @@ const ProductCard = ({ data, isEvent }) => {
         <Link
           to={`${
             isEvent === true
-              ? `/product/${data._id}?isEvent=true`
-              : `/product/${data.id}`
+              ? `${PATHS.APP.PRODUCT_DETAILS}/${data._id}?isEvent=true`
+              : "product/" + data._id
           }`}
         >
           {/* <img
@@ -80,8 +78,8 @@ const ProductCard = ({ data, isEvent }) => {
         <Link
           to={`${
             isEvent === true
-              ? `/product/${data._id}?isEvent=true`
-              : `/product/${data._id}`
+              ? `${PATHS.APP.PRODUCT_DETAILS}/${data._id}?isEvent=true`
+              : "product/" + data._id
           }`}
         >
           <h4 className="pb-3 font-[500]">
@@ -89,23 +87,20 @@ const ProductCard = ({ data, isEvent }) => {
           </h4>
 
           <div className="flex">
-            <Ratings rating={data?.ratings} />
+            <Ratings rating={data?.rating} />
           </div>
 
           <div className="py-2 flex items-center justify-between">
             <div className="flex">
               <h5 className={`${styles.productDiscountPrice}`}>
-                {data.originalPrice === 0
-                  ? data.originalPrice
-                  : data.discountPrice}
-                $
+                {data.price === 0 ? data.price : data.discount_price}$
               </h5>
               <h4 className={`${styles.price}`}>
-                {data.originalPrice ? data.originalPrice + " $" : null}
+                {data.price ? data.price + " $" : null}
               </h4>
             </div>
             <span className="font-[400] text-[17px] text-[#68d284]">
-              {data?.sold_out} sold
+              {data?.total_sell} sold
             </span>
           </div>
         </Link>

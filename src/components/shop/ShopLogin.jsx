@@ -1,16 +1,12 @@
-import { React, useEffect, useState } from "react";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import styles from "../../styles/styles";
-import { Link, useNavigate } from "react-router-dom";
-// import { server } from "../../server";
+import { React, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { shopLoginValidationSchema } from "../../utils/validationSchema";
+import ShopForm from "./forms/ShopForm";
+import useShops from "../../hooks/useShops";
+import { PATHS } from "../../utils/paths";
 import { toast } from "react-toastify";
 
 const ShopLogin = () => {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [visible, setVisible] = useState(false);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -32,6 +28,24 @@ const ShopLogin = () => {
     //     toast.error(err.response.data.message);
     //   });
   };
+  const navigate = useNavigate();
+  const { shopLogin } = useShops();
+  const handleShopLogin = async (shopData) => {
+    console.log("Shop Form Submit", shopData);
+    try {
+      const response = await shopLogin(shopData);
+      console.log(response, "Trying");
+      if (response.status === 200) {
+        toast.success(response?.message);
+        navigate(PATHS.APP.SHOP_HOME);
+      } else {
+        toast.error(`${response?.data.message}
+      `);
+      }
+    } catch (err) {
+      toast.error(err);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -41,7 +55,7 @@ const ShopLogin = () => {
         </h2>
       </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        {/* <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label
@@ -133,7 +147,13 @@ const ShopLogin = () => {
               </Link>
             </div>
           </form>
-        </div>
+        </div> */}
+        <ShopForm
+          validationSchema={shopLoginValidationSchema}
+          onSubmitHandler={handleShopLogin}
+          isCreate={false}
+          buttonText="Login"
+        />
       </div>
     </div>
   );

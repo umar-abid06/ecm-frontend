@@ -5,12 +5,18 @@ import {
   AiOutlineMessage,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 // import { server } from "../../server";
-import styles from "../../styles/styles";
 import { toast } from "react-toastify";
-import { Ratings } from "./index";
 import { useStore } from "../../store";
+import styles from "../../styles/styles";
+import { Ratings } from "./index";
+import { useProductById } from "../../hooks/useProducts";
 
 const ProductDetails = ({ data }) => {
   const {
@@ -27,6 +33,7 @@ const ProductDetails = ({ data }) => {
   const [click, setClick] = useState(false);
   const [select, setSelect] = useState(0);
   const navigate = useNavigate();
+
   useEffect(() => {
     // getAllProductsShop(data && data?.shop._id);
     if (wishlist && wishlist.find((i) => i?.id === data?.id)) {
@@ -70,7 +77,7 @@ const ProductDetails = ({ data }) => {
       }
     }
   };
-  console.log(products);
+
   const totalReviewsLength =
     products &&
     products.reduce((acc, product) => acc + product.reviews?.length, 0);
@@ -308,7 +315,7 @@ const ProductDetailsInfo = ({
       {active === 2 ? (
         <div className="w-full min-h-[40vh] flex flex-col items-center py-3 overflow-y-scroll">
           {data &&
-            data.reviews.map((item, index) => (
+            data?.reviews?.map((item, index) => (
               <div className="w-full flex my-2">
                 <img
                   src={`${item.user.avatar?.url}`}
@@ -326,7 +333,7 @@ const ProductDetailsInfo = ({
             ))}
 
           <div className="w-full flex justify-center">
-            {data && data.reviews.length === 0 && (
+            {data && data?.reviews?.length === 0 && (
               <h5>No Reviews have for this product!</h5>
             )}
           </div>

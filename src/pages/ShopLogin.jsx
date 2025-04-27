@@ -7,11 +7,11 @@ const ShopLoginPage = () => {
   const navigate = useNavigate();
   const { isSeller, isLoading } = useStore();
 
-  useEffect(() => {
-    if (isSeller === true) {
-      //   navigate(`/shop-dashboard`);
-    }
-  }, [isLoading, isSeller]);
+  // useEffect(() => {
+  //   if (isSeller === true) {
+  //     //   navigate(`/shop-dashboard`);
+  //   }
+  // }, [isLoading, isSeller]);
   return (
     <div>
       <ShopLogin />

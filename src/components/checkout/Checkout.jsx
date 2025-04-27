@@ -24,7 +24,7 @@ const Checkout = () => {
   const [couponCodeData, setCouponCodeData] = useState(null);
   const [discountPrice, setDiscountPrice] = useState(null);
   const navigate = useNavigate();
-
+  console.log(cart);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

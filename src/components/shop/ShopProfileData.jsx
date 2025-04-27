@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { getAllProductsShop } from "../../redux/actions/product";
 import styles from "../../styles/styles";
-import ProductCard from "../Route/ProductCard/ProductCard";
-import { Ratings } from "../products";
+
+import { ProductCard, Ratings } from "../products";
 import { useStore } from "../../store";
+import { PATHS } from "../../utils/paths";
 
 const ShopProfileData = ({ isOwner }) => {
   const { products, events } = useStore();
   const { id } = useParams();
 
-  useEffect(() => {
-    dispatch(getAllProductsShop(id));
-    dispatch(getAllEventsShop(id));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getAllProductsShop(id));
+  //   dispatch(getAllEventsShop(id));
+  // }, [dispatch]);
 
   const [active, setActive] = useState(1);
 
@@ -57,7 +56,7 @@ const ShopProfileData = ({ isOwner }) => {
         <div>
           {isOwner && (
             <div>
-              <Link to="/dashboard">
+              <Link to={PATHS.APP.SHOP_DASHBOARD}>
                 <div className={`${styles.button} !rounded-[4px] h-[42px]`}>
                   <span className="text-[#fff]">Go Dashboard</span>
                 </div>

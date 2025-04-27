@@ -165,17 +165,17 @@ const AppRoutes = () => {
     {
       path: PATHS.APP.SHOP_PREVIEW,
       element: (
-        <GuestGuard>
-          <ShopPreview />
-        </GuestGuard>
+        // <GuestGuard>
+        <ShopPreview />
+        // </GuestGuard>
       ),
     },
     {
       path: PATHS.APP.SHOP_LOGIN,
       element: (
-        <GuestGuard>
-          <ShopLogin />
-        </GuestGuard>
+        // <GuestGuard>
+        <ShopLogin />
+        // </GuestGuard>
       ),
     },
     {
@@ -205,9 +205,9 @@ const AppRoutes = () => {
     {
       path: PATHS.APP.SHOP_DASHBOARD,
       element: (
-        <SellerGuard>
-          <ShopDashboard />
-        </SellerGuard>
+        // <SellerGuard>
+        <ShopDashboard />
+        // </SellerGuard>
       ),
     },
     {

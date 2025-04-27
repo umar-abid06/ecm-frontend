@@ -2,27 +2,30 @@ import React, { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { ProductDetails } from "../components/products";
 // import SuggestedProduct from "../components/Products/SuggestedProduct";
+import Footer from "../components/layout/footer";
 import Header from "../components/layout/header";
 import { useStore } from "../store";
-import Footer from "../components/layout/footer";
+import { useProductById } from "../hooks/useProducts";
 
 const ProductDetailsPage = () => {
-  const { products: allProducts, events: allEvents } = useStore();
+  const { events: allEvents } = useStore();
   const { id } = useParams();
-  const [data, setData] = useState(null);
+  const { data } = useProductById(id);
+  const [eventData, setEventData] = useState(null);
   const [searchParams] = useSearchParams();
-  const eventData = searchParams.get("isEvent");
+  const isEventData = searchParams.get("isEvent");
 
   useEffect(() => {
-    if (eventData !== null) {
+    if (isEventData !== null) {
       const data = allEvents && allEvents.find((i) => i?.id == id);
-      setData(data);
-    } else {
-      const productData = allProducts && allProducts.find((i) => i.id == id);
-      setData(productData);
-      // console.log("DATA", data, allProducts, id);
+      setEventData(data);
     }
-  }, [allProducts, allEvents]);
+    //  else {
+    //   const productData = allProducts && allProducts.find((i) => i.id == id);
+    //   setData(productData);
+    //   // console.log("DATA", data, allProducts, id);
+    // }
+  }, [allEvents]);
 
   return (
     <div>

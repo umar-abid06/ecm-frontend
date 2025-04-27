@@ -10,6 +10,7 @@ export const ENDPOINTS = {
   USER_PROFILE: "/user/profile",
 
   PRODUCT_CATEGORIES: "/categories",
+  PRODUCTS: "/products",
 
   //orders
   GET_ALL_ORDERS: "",
@@ -17,6 +18,8 @@ export const ENDPOINTS = {
   ADMIN_ALL_ORDERS: "",
 
   //seller
+  SHOP_CREATE: "/shop/create-shop",
+  SHOP_LOGIN: "/shop/login-shop",
   LOAD_SELLER: "",
   ADMIN_ALL_SELLERS: "",
 

@@ -1,22 +1,11 @@
 import { React, useState } from "react";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import styles from "../../styles/styles";
-import { Link, useNavigate } from "react-router-dom";
 // import { server } from "../../server";
 import { toast } from "react-toastify";
-import { RxAvatar } from "react-icons/rx";
-import { PATHS } from "../../utils/paths";
+import useShops from "../../hooks/useShops";
+import { shopCreateValidationSchema } from "../../utils/validationSchema";
+import ShopForm from "./forms/ShopForm";
 
 const ShopCreate = () => {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState();
-  const [address, setAddress] = useState("");
-  const [zipCode, setZipCode] = useState();
-  const [avatar, setAvatar] = useState();
-  const [password, setPassword] = useState("");
-  const [visible, setVisible] = useState(false);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -56,15 +45,40 @@ const ShopCreate = () => {
 
     reader.readAsDataURL(e.target.files[0]);
   };
+  const { shopCreate } = useShops();
 
+  const handleShopCreate = async (shopData) => {
+    console.log("Shop Form Submit", shopData);
+    try {
+      const response = await shopCreate(shopData);
+      console.log(response, "Trying");
+      if (response.status === 200) {
+        toast.success(response?.data?.message);
+        // navigate(PATHS.AUTH.LOGIN);
+      } else {
+        toast.error(`${response?.data.message}
+    `);
+      }
+    } catch (err) {
+      toast.error(err);
+    }
+  };
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Register as a seller
+          Register As A Seller
         </h2>
       </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[35rem]">
+        <ShopForm
+          validationSchema={shopCreateValidationSchema}
+          onSubmitHandler={handleShopCreate}
+          isCreate={true}
+          buttonText="Create Shop"
+        />
+      </div>
+      {/* <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[35rem]">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
@@ -245,7 +259,7 @@ const ShopCreate = () => {
             </div>
           </form>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

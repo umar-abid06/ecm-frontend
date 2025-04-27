@@ -1,4 +1,3 @@
-import React from "react";
 import useAuth from "../hooks/useAuth";
 import useAuthStore from "../store/auth/authStore";
 import Header from "../components/layout/header";
@@ -11,8 +10,11 @@ import {
   FeaturedProduct,
 } from "../components/home";
 import { Events } from "../components/events";
+import { useProducts } from "../hooks/useProducts";
+import LoadingComponent from "../components/LoadingComponent";
 
 const Home = () => {
+  useProducts(); // triggers Zustand update
   const { isAuth, userData } = useAuthStore();
   const { logout } = useAuth();
 
@@ -25,7 +27,9 @@ const Home = () => {
       <Header activeHeading={1} />
       <Hero />
       <Categories />
+
       <BestDeals />
+
       <Events />
       <FeaturedProduct />
       <Sponsored />

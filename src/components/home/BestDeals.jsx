@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
-import styles from "../../styles/styles";
+import { useProducts } from "../../hooks/useProducts";
 import { ProductCard } from "../products";
-import { useStore } from "../../store";
+import styles from "../../styles/styles";
 
 const BestDeals = () => {
   const [data, setData] = useState([]);
-  const { products } = useStore();
+  const { products, error, isLoading } = useProducts();
 
   useEffect(() => {
     const allProductsData = products ? [...products] : [];
-    const sortedData = allProductsData?.sort((a, b) => b.sold_out - a.sold_out);
+    const sortedData = allProductsData?.sort(
+      (a, b) => b.total_sell - a.total_sell
+    );
     const firstFive = sortedData && sortedData.slice(0, 5);
     setData(firstFive);
   }, [products]);

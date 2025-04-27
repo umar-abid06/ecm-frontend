@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Footer from "../components/layout/footer";
 import Header from "../components/layout/header";
-import ProductCard from "../components/products/ProductCard";
-import styles from "../styles/styles";
 import LoadingComponent from "../components/LoadingComponent";
+import ProductCard from "../components/products/ProductCard";
 import { useStore } from "../store";
+import styles from "../styles/styles";
 
 const Products = () => {
   const [searchParams] = useSearchParams();
   const categoryData = searchParams.get("category");
-  const { products: allProducts, isLoading } = useStore();
+  const { allProducts, productsLoading: isLoading } = useStore();
   const [data, setData] = useState([]);
-
+  console.log("Products", allProducts);
   useEffect(() => {
     if (categoryData === null) {
       const d = allProducts;
@@ -22,6 +22,7 @@ const Products = () => {
         allProducts && allProducts.filter((i) => i.category === categoryData);
       setData(d);
     }
+    console.log(data);
     window.scrollTo(0, 0);
   }, [allProducts]);
 

@@ -1,10 +1,4 @@
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { requestApi } from "../api/requestApi";
 import { ENDPOINTS } from "../api/endpoints";
 import { useStore } from "../store";
