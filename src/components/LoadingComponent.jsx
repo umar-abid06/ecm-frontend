@@ -3,9 +3,9 @@ import React from "react";
 import Lottie from "lottie-react";
 import loadingAnimation from "../assets/lottie/loading-animation.json";
 
-const LoadingComponent = () => {
+const LoadingComponent = ({ classNames }) => {
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className={`flex items-center justify-center h-screen ${classNames}`}>
       <Lottie
         animationData={loadingAnimation} // Load the Lottie animation JSON file
         className="

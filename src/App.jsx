@@ -13,7 +13,8 @@ function App() {
   const { loading } = useLoadingStore();
   return (
     <ApiClientProvider>
-      {loading && <LoadingComponent />} {/* Show LoadingComponent if loading */}
+      {loading && <LoadingComponent />}
+      {/* Show LoadingComponent if loading */}
       <Router>
         <AppRoutes />
       </Router>

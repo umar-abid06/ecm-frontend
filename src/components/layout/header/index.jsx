@@ -129,22 +129,22 @@ const Header = ({ activeHeading }) => {
           <div onClick={() => setDropDown(!dropDown)}>
             <div className="relative h-[60px] mt-[10px] w-[270px] hidden md:block">
               <BiMenuAltLeft size={30} className="absolute top-3 left-2" />
-              <button
+              {/* <button
                 className={`h-[100%] w-full flex justify-between items-center pl-10 bg-white font-sans text-lg font-[500] select-none rounded-t-md`}
+              >
+                All Categories
+              </button> */}
+              <button
+                className={`  normal-case w-[80%] h-[80%] text-center bg-white rounded-md flex justify-center items-center cursor-pointer  font-bold`}
               >
                 All Categories
               </button>
               <IoIosArrowDown
                 size={20}
-                className="absolute right-2 top-4 cursor-pointer"
+                className="absolute right-16 top-4 cursor-pointer"
                 onClick={() => setDropDown(!dropDown)}
               />
-              {dropDown ? (
-                <DropDown
-                  categoriesData={categoriesData}
-                  setDropDown={setDropDown}
-                />
-              ) : null}
+              {dropDown ? <DropDown setDropDown={setDropDown} /> : null}
             </div>
           </div>
           {/* navitems */}
@@ -182,12 +182,16 @@ const Header = ({ activeHeading }) => {
             <div className={`${styles.normalFlex}`}>
               <div className="relative cursor-pointer mr-[15px]">
                 {isAuthenticated ? (
-                  <Link to="/profile">
-                    <img
-                      src={`${user?.avatar?.url}`}
-                      className="w-[35px] h-[35px] rounded-full"
-                      alt=""
-                    />
+                  <Link to={PATHS.APP.PROFILE}>
+                    {user?.avatar?.url ? (
+                      <img
+                        src={`${user?.avatar?.url}`}
+                        className="w-[35px] h-[35px] rounded-full"
+                        alt=""
+                      />
+                    ) : (
+                      <CgProfile size={30} color="rgb(255 255 255 / 83%)" />
+                    )}
                   </Link>
                 ) : (
                   <Link to={PATHS.AUTH.LOGIN}>

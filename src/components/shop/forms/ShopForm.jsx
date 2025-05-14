@@ -1,22 +1,20 @@
-// src/components/shop/ShopForm.jsx
-
+import InputField from "../../input-field/InputField.jsx";
+import styles from "../../../styles/styles.js";
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  FaEnvelope,
-  FaLock,
-  FaMapMarkerAlt,
-  FaPhone,
-  FaStore,
-  FaHashtag,
-} from "react-icons/fa";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { RxAvatar } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import { PATHS } from "../../../utils/paths.js";
-import InputField from "../../input-field/InputField.jsx";
-import styles from "../../../styles/styles.js";
+import {
+  FaEnvelope,
+  FaHashtag,
+  FaLock,
+  FaMapMarkerAlt,
+  FaPhone,
+  FaStore,
+} from "react-icons/fa";
 
 const ShopForm = ({
   validationSchema,

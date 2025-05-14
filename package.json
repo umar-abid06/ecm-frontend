@@ -22,6 +22,7 @@
     "apisauce": "^3.0.1",
     "axios": "^1.7.7",
     "country-state-city": "^3.2.1",
+    "framer-motion": "^12.11.3",
     "lottie-react": "^2.4.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

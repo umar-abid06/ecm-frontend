@@ -11,7 +11,6 @@ import {
 } from "../components/home";
 import { Events } from "../components/events";
 import { useProducts } from "../hooks/useProducts";
-import LoadingComponent from "../components/LoadingComponent";
 
 const Home = () => {
   useProducts(); // triggers Zustand update
@@ -23,7 +22,7 @@ const Home = () => {
     logout();
   };
   return (
-    <div>
+    <div className="bg-[#f6f6f5]">
       <Header activeHeading={1} />
       <Hero />
       <Categories />
@@ -34,8 +33,8 @@ const Home = () => {
       <FeaturedProduct />
       <Sponsored />
       <Footer />
-
-      <button onClick={handleLogout}>Logout</button>
+      {/* 
+      <button onClick={handleLogout}>Logout</button> */}
     </div>
   );
 };

@@ -8,10 +8,10 @@ export const useCartStore = create(
 
       addToCart: (item) =>
         set((state) => {
-          const isItemExist = state.cart.find((i) => i.id === item.id);
+          const isItemExist = state.cart.find((i) => i._id === item._id);
 
           const updatedCart = isItemExist
-            ? state.cart.map((i) => (i.id === isItemExist.id ? item : i))
+            ? state.cart.map((i) => (i._id === isItemExist._id ? item : i))
             : [...state.cart, item];
 
           return { cart: updatedCart };
@@ -20,7 +20,7 @@ export const useCartStore = create(
       removeFromCart: (data) =>
         set((state) => {
           return {
-            cart: state.cart.filter((i) => i.id !== data.id),
+            cart: state.cart.filter((i) => i._id !== data._id),
           };
         }),
     }),

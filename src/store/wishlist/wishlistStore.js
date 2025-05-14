@@ -8,10 +8,10 @@ export const useWishlistStore = create(
 
       addToWishlist: (item) =>
         set((state) => {
-          const isItemExist = state.wishlist.find((i) => i.id === item.id);
+          const isItemExist = state.wishlist.find((i) => i._id === item._id);
 
           const updatedWishlist = isItemExist
-            ? state.wishlist.map((i) => (i.id === isItemExist.id ? item : i))
+            ? state.wishlist.map((i) => (i._id === isItemExist._id ? item : i))
             : [...state.wishlist, item];
 
           return { wishlist: updatedWishlist };
@@ -19,7 +19,7 @@ export const useWishlistStore = create(
 
       removeFromWishlist: (data) =>
         set((state) => ({
-          wishlist: state.wishlist.filter((i) => i.id !== data.id),
+          wishlist: state.wishlist.filter((i) => i._id !== data._id),
         })),
     }),
     {

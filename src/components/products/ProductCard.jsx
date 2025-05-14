@@ -19,7 +19,7 @@ const ProductCard = ({ data, isEvent }) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (wishlist && wishlist.find((i) => i.id === data.id)) {
+    if (wishlist && wishlist.find((i) => i._id === data._id)) {
       setClick(true);
     } else {
       setClick(false);
@@ -37,7 +37,7 @@ const ProductCard = ({ data, isEvent }) => {
   };
 
   const addToCartHandler = (id) => {
-    const isItemExists = cart && cart.find((i) => i.id === id);
+    const isItemExists = cart && cart.find((i) => i._id === id);
     if (isItemExists) {
       toast.error("Item already in cart!");
     } else {
@@ -134,7 +134,7 @@ const ProductCard = ({ data, isEvent }) => {
           <AiOutlineShoppingCart
             size={25}
             className="cursor-pointer absolute right-2 top-24"
-            onClick={() => addToCartHandler(data.id)}
+            onClick={() => addToCartHandler(data._id)}
             color="#444"
             title="Add to cart"
           />

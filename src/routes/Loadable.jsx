@@ -1,12 +1,12 @@
 import React, { Suspense } from "react";
 import ErrorBoundary from "../components/ErrorBoundary";
-import LoadingComponent from "../components/LoadingComponent";
+import InitialLoadingInterface from "../components/InitialLoadingInterface";
 
 // Loadable function to wrap components in ErrorBoundary and Suspense
 const Loadable = (Component) => (props) =>
   (
     <ErrorBoundary>
-      <Suspense fallback={<LoadingComponent />}>
+      <Suspense fallback={<InitialLoadingInterface />}>
         <Component {...props} />
       </Suspense>
     </ErrorBoundary>

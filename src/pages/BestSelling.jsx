@@ -6,15 +6,18 @@ import Footer from "../components/layout/footer";
 import { ProductCard } from "../components/products";
 import styles from "../styles/styles";
 import { useStore } from "../store";
+import { useProducts } from "../hooks/useProducts";
 
 const BestSelling = () => {
   const [data, setData] = useState([]);
-  const { products: allProducts, isLoading } = useStore();
+  const { products: allProducts, error, isLoading } = useProducts();
 
   useEffect(() => {
     const allProductsData = allProducts ? [...allProducts] : [];
-    const sortedData = allProductsData?.sort((a, b) => b.sold_out - a.sold_out);
-    setData(sortedData);
+    const sortedData = allProductsData?.sort(
+      (a, b) => b.total_sell - a.total_sell
+    );
+    setData(sortedData.slice(0, 5));
   }, [allProducts]);
 
   return (
