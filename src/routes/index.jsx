@@ -48,25 +48,25 @@ const AppRoutes = () => {
     {
       path: PATHS.AUTH.LOGIN,
       element: (
-        // <GuestGuard>
-        <Login />
-        // </GuestGuard>
+        <GuestGuard>
+          <Login />
+        </GuestGuard>
       ),
     },
     {
       path: PATHS.AUTH.REGISTER,
       element: (
-        // <GuestGuard>
-        <Register />
-        // </GuestGuard>
+        <GuestGuard>
+          <Register />
+        </GuestGuard>
       ),
     },
     {
       path: PATHS.AUTH.ACTIVATION,
       element: (
-        // <GuestGuard>
-        <Activation />
-        // </GuestGuard>
+        <GuestGuard>
+          <Activation />
+        </GuestGuard>
       ),
     },
     // Main Application Routes
