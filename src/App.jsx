@@ -1,13 +1,12 @@
 // src/App.js
-import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import AppRoutes from "./routes";
-import ApiClientProvider from "./context/ApiClientProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import LoadingComponent from "./components/LoadingComponent";
-import useLoadingStore from "./store/loadingStore";
 import "../src/styles/toast.css";
+import AppRoutes from "./routes";
+import LoadingComponent from "./components/LoadingComponent";
+import ApiClientProvider from "./context/ApiClientProvider";
+import useLoadingStore from "./store/loadingStore";
 
 function App() {
   const { loading } = useLoadingStore();

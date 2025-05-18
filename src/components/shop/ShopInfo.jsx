@@ -60,7 +60,7 @@ const ShopInfo = ({ isOwner }) => {
                   className="w-[150px] h-[150px] object-cover rounded-full"
                 />
               ) : (
-                <RxAvatar className="w-[100px] h-[100px] text-gray-400" />
+                <RxAvatar className="w-[100px] h-[100px] text-gray-500" />
               )}
             </div>
             <h3 className="text-center py-2 text-[20px]">{data.name}</h3>
