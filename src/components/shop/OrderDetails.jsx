@@ -2,26 +2,24 @@ import React, { useEffect, useState } from "react";
 import styles from "../../styles/styles";
 import { BsFillBagFill } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllOrdersOfShop } from "../../redux/actions/order";
 import { server } from "../../server";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const OrderDetails = () => {
-  const { orders, isLoading } = useSelector((state) => state.order);
-  const { seller } = useSelector((state) => state.seller);
-  const dispatch = useDispatch();
+  const orders = [];
+  const seller = [];
+
   const [status, setStatus] = useState("");
   const navigate = useNavigate();
 
   const { id } = useParams();
 
-  useEffect(() => {
-    dispatch(getAllOrdersOfShop(seller._id));
-  }, [dispatch]);
+  // useEffect(() => {
 
-  const data = orders && orders.find((item) => item._id === id);
+  // }, [dispatch]);
+
+  const data = orders && orders?.find((item) => item._id === id);
 
   const orderUpdateHandler = async (e) => {
     await axios
@@ -52,7 +50,6 @@ const OrderDetails = () => {
       )
       .then((res) => {
         toast.success("Order updated!");
-        dispatch(getAllOrdersOfShop(seller._id));
       })
       .catch((error) => {
         toast.error(error.response.data.message);
