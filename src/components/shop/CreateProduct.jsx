@@ -5,10 +5,11 @@ import { toast } from "react-toastify";
 import { categoriesData } from "../../static/data";
 import { useStore } from "../../store";
 import { PATHS } from "../../utils/paths";
+import { useCreateProduct } from "../../hooks/useProducts";
 
 const CreateProduct = () => {
-  const { seller, addProducts: createProduct } = useStore();
-
+  const { seller } = useStore();
+  const { mutate: createProduct, isPending } = useCreateProduct();
   const navigate = useNavigate();
 
   const [success, setSuccess] = useState();
@@ -22,16 +23,16 @@ const CreateProduct = () => {
   const [discountPrice, setDiscountPrice] = useState();
   const [stock, setStock] = useState();
 
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-    }
-    if (success) {
-      toast.success("Product created successfully!");
-      navigate(PATHS.APP.SHOP_DASHBOARD);
-      window.location.reload();
-    }
-  }, [error, success]);
+  // useEffect(() => {
+  //   if (error) {
+  //     toast.error(error);
+  //   }
+  //   if (success) {
+  //     toast.success("Product created successfully!");
+  //     navigate(PATHS.APP.SHOP_DASHBOARD);
+  //     window.location.reload();
+  //   }
+  // }, [error, success]);
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
@@ -67,22 +68,38 @@ const CreateProduct = () => {
     newForm.append("stock", stock);
     newForm.append("shopId", seller?.id);
 
-    createProduct({
+    const newProduct = {
+      category,
       name,
       description,
-      category,
-      tags,
-      originalPrice,
-      discountPrice,
+      image_Url: [
+        {
+          public_id: "test",
+          url: "https://media.gettyimages.com/id/912819748/de/vektor/flaches-design-e-commerce-warenkorbsymbol.jpg?s=612x612&w=gi&k=20&c=VD3OZUOU3DM_Nwhf9VxAFcY0YVP0DoOt4_Zwd1tM3Ag=",
+        },
+        ,
+      ],
+      shop: {
+        name: seller?.id ? seller?.id : "user123",
+        ratings: 4.5,
+        shop_avatar: {
+          public_id: "test",
+          url: "https://www.hatchwise.com/wp-content/uploads/2022/05/amazon-logo-1024x683.png",
+        },
+      },
+      price: originalPrice,
+      discount_price: discountPrice,
+      rating: 4.5,
+      total_sell: 40,
       stock,
-      shopId: seller?.id,
-      images,
-    });
+    };
+    createProduct(newProduct);
+
     // To be changed
     setSuccess(true);
     setError(false);
   };
-
+  // "Error creating product: ProductSchema validation failed: shop.ratings: Path `shop.ratings` is required., image_Url.0.url: Path `url` is required., image_Url.0.public_id: Path `public_id` is required.""
   return (
     <div className="w-[90%] md:w-[50%] bg-white  shadow h-[80vh] rounded-[4px] p-3 overflow-y-scroll">
       <h5 className="text-[30px] font-Poppins text-center">Create Product</h5>

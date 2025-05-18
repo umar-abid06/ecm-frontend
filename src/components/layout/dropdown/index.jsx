@@ -1,8 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import styles from "../../../styles/styles";
 import { motion } from "framer-motion";
-import useCategories from "../../../hooks/useCategories";
+import { useNavigate } from "react-router-dom";
 import { PATHS } from "../../../utils/paths";
+import useCategories from "../../../hooks/useCategories";
 
 const DropDown = ({ setDropDown }) => {
   const navigate = useNavigate();

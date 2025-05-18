@@ -363,8 +363,7 @@ const PaymentInfo = ({
                   </div>
                   <PayPalScriptProvider
                     options={{
-                      "client-id":
-                        "Aczac4Ry9_QA1t4c7TKH9UusH3RTe6onyICPoCToHG10kjlNdI-qwobbW9JAHzaRQwFMn2-k660853jn",
+                      "client-id": import.meta.env.VITE_STRIPE_KEY,
                     }}
                   >
                     <PayPalButtons
@@ -419,12 +418,12 @@ const CartData = ({ orderData }) => {
   return (
     <div className="w-full bg-[#fff] rounded-md p-5 pb-8">
       <div className="flex justify-between">
-        <h3 className="text-[16px] font-[400] text-[#000000a4]">subtotal:</h3>
+        <h3 className="text-[16px] font-[400] text-[#000000a4]">Subtotal:</h3>
         <h5 className="text-[18px] font-[600]">${orderData?.subTotalPrice}</h5>
       </div>
       <br />
       <div className="flex justify-between">
-        <h3 className="text-[16px] font-[400] text-[#000000a4]">shipping:</h3>
+        <h3 className="text-[16px] font-[400] text-[#000000a4]">Shipping:</h3>
         <h5 className="text-[18px] font-[600]">${shipping}</h5>
       </div>
       <br />

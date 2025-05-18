@@ -6,9 +6,9 @@ import Footer from "./layout/footer";
 const InitialLoadingInterface = () => {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <LoadingComponent />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

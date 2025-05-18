@@ -3,6 +3,8 @@ import ShopForm from "./forms/ShopForm";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { PATHS } from "../../utils/paths";
+import { Button } from "@mui/material";
+import { GoArrowLeft } from "react-icons/go";
 import { shopCreateValidationSchema } from "../../utils/validationSchema";
 
 const ShopCreate = () => {
@@ -37,6 +39,15 @@ const ShopCreate = () => {
           isCreate={true}
           buttonText="Create Shop"
         />
+      </div>
+      <div className="m-2">
+        <Button
+          variant="contained"
+          startIcon={<GoArrowLeft />}
+          onClick={() => navigate(PATHS.APP.HOME)}
+        >
+          Back to Home
+        </Button>
       </div>
     </div>
   );

@@ -95,7 +95,7 @@ const AppRoutes = () => {
       ),
     },
     {
-      path: PATHS.APP.PRODUCT_DETAILS,
+      path: PATHS.APP.PRODUCT_DETAILS_ROUTE,
       element: (
         // <AuthGuard>
         <ProductDetails />

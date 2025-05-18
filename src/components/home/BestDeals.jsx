@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useProducts } from "../../hooks/useProducts";
+import { useAllProducts } from "../../hooks/useProducts";
 import { ProductCard } from "../products";
 import styles from "../../styles/styles";
 
 const BestDeals = () => {
   const [data, setData] = useState([]);
-  const { products, error, isLoading } = useProducts();
+  const { data: products, isLoading, error } = useAllProducts();
 
   useEffect(() => {
     const allProductsData = products ? [...products] : [];

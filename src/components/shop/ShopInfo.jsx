@@ -4,6 +4,7 @@ import styles from "../../styles/styles";
 import LoadingComponent from "../LoadingComponent";
 import { useStore } from "../../store";
 import { RxAvatar } from "react-icons/rx";
+import { PATHS } from "../../utils/paths";
 
 const ShopInfo = ({ isOwner }) => {
   const [data, setData] = useState({});
@@ -91,7 +92,7 @@ const ShopInfo = ({ isOwner }) => {
           </div>
           {isOwner && (
             <div className="py-3 px-4">
-              <Link to="/settings">
+              <Link to={PATHS.APP.SHOP_SETTINGS}>
                 <div
                   className={`${styles.button} !w-full !h-[42px] !rounded-[5px]`}
                 >

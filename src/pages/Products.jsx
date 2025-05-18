@@ -6,14 +6,15 @@ import LoadingComponent from "../components/LoadingComponent";
 import ProductCard from "../components/products/ProductCard";
 import { useStore } from "../store";
 import styles from "../styles/styles";
-import { useProducts } from "../hooks/useProducts";
+import { useAllProducts } from "../hooks/useProducts";
 
 const Products = () => {
   const [searchParams] = useSearchParams();
   const categoryData = searchParams.get("category");
-  const { products: allProducts, isLoading } = useProducts();
+
+  const { data: allProducts, isLoading, error } = useAllProducts();
   const [data, setData] = useState([]);
-  console.log("Products", allProducts);
+
   useEffect(() => {
     if (categoryData === null) {
       const d = allProducts;
@@ -23,7 +24,7 @@ const Products = () => {
         allProducts && allProducts.filter((i) => i.category === categoryData);
       setData(d);
     }
-    console.log(data);
+
     window.scrollTo(0, 0);
   }, [allProducts]);
 
@@ -43,9 +44,14 @@ const Products = () => {
             )}
           </div>
           {data && data.length === 0 ? (
-            <h1 className="text-center w-full pb-[100px] text-[20px]">
-              No products Found!
-            </h1>
+            <>
+              <h1 className="text-center w-full  text-[20px]">
+                No products Found!
+              </h1>
+              <p className="text-center w-full pb-[100px] text-[20px]">
+                For this category: {categoryData}
+              </p>
+            </>
           ) : null}
         </div>
         <Footer />

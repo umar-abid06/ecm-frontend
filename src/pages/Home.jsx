@@ -10,10 +10,8 @@ import {
   FeaturedProduct,
 } from "../components/home";
 import { Events } from "../components/events";
-import { useProducts } from "../hooks/useProducts";
 
 const Home = () => {
-  useProducts(); // triggers Zustand update
   const { isAuth, userData } = useAuthStore();
   const { logout } = useAuth();
 

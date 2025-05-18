@@ -16,7 +16,8 @@ export const PATHS = {
     HOME: path(ROOTS_APP, ""),
     BESTSELLING: path(ROOTS_APP, "best-selling"),
     PRODUCTS: path(ROOTS_APP, "products"),
-    PRODUCT_DETAILS: path(ROOTS_APP, "product/:id"),
+    PRODUCT_DETAILS: "/product", // ✅ used for link generation
+    PRODUCT_DETAILS_ROUTE: "/product/:id", // ✅ used for route config
     EVENTS: path(ROOTS_APP, "events"),
     FAQ: path(ROOTS_APP, "faq"),
     PROFILE: path(ROOTS_APP, "profile"),

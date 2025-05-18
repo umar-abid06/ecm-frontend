@@ -82,7 +82,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                   alt=""
                 />
                 <div className="flex">
-                  <Link to={`/shop/preview/${data.shop._id}`} className="flex">
+                  <Link to={`/shop/preview/${data.shop?._id}`} className="flex">
                     <img
                       src={`${data.image_Url && data.image_Url[0]?.url}`}
                       alt=""
@@ -90,7 +90,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                     />
                     <div>
                       <h3 className={`${styles.shop_name}`}>
-                        {data.shop.name}
+                        {data.shop?.name}
                       </h3>
                       <h5 className="pb-3 text-[15px]">
                         {data?.ratings} Ratings
@@ -111,16 +111,16 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 
               <div className="w-full md:w-[50%] pt-5 pl-[5px] pr-[5px]">
                 <h1 className={`${styles.productTitle} text-[20px]`}>
-                  {data.name}
+                  {data?.name}
                 </h1>
-                <p>{data.description}</p>
+                <p>{data?.description}</p>
 
                 <div className="flex pt-3">
                   <h4 className={`${styles.productDiscountPrice}`}>
-                    {data.discount_price}$
+                    {data?.discount_price}$
                   </h4>
                   <h3 className={`${styles.price}`}>
-                    {data.originalPrice ? data.originalPrice + "$" : null}
+                    {data?.originalPrice ? data?.originalPrice + "$" : null}
                   </h3>
                 </div>
                 <div className="flex items-center mt-12 justify-between pr-3">

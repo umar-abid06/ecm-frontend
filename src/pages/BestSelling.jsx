@@ -6,11 +6,11 @@ import Footer from "../components/layout/footer";
 import { ProductCard } from "../components/products";
 import styles from "../styles/styles";
 import { useStore } from "../store";
-import { useProducts } from "../hooks/useProducts";
+import { useAllProducts } from "../hooks/useProducts";
 
 const BestSelling = () => {
   const [data, setData] = useState([]);
-  const { products: allProducts, error, isLoading } = useProducts();
+  const { data: allProducts, isLoading, error } = useAllProducts();
 
   useEffect(() => {
     const allProductsData = allProducts ? [...allProducts] : [];

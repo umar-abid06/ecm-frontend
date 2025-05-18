@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import styles from "../../styles/styles";
+import { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { HiOutlineMinus, HiPlus } from "react-icons/hi";
-import styles from "../../styles/styles";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useStore } from "../../store";
+import { PATHS } from "../../utils/paths";
 
 const Cart = ({ setOpenCart }) => {
   const { addToCart, removeFromCart, cart } = useStore();
@@ -72,12 +73,12 @@ const Cart = ({ setOpenCart }) => {
 
             <div className="px-5 mb-3">
               {/* checkout buttons */}
-              <Link to="/checkout">
+              <Link to={PATHS.APP.CHECKOUT}>
                 <div
                   className={`h-[45px] flex items-center justify-center w-[100%] bg-[#e44343] rounded-[5px]`}
                 >
                   <h1 className="text-[#fff] text-[18px] font-[600]">
-                    Checkout Now (USD${totalPrice})
+                    Checkout Now (USD$ {totalPrice})
                   </h1>
                 </div>
               </Link>

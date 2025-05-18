@@ -16,7 +16,6 @@ import { toast } from "react-toastify";
 import { useStore } from "../../store";
 import styles from "../../styles/styles";
 import { Ratings } from "./index";
-import { useProductById } from "../../hooks/useProducts";
 
 const ProductDetails = ({ data }) => {
   const {
@@ -210,7 +209,7 @@ const ProductDetails = ({ data }) => {
                   </span>
                 </div>
                 <div className="flex items-center pt-8">
-                  <Link to={`/shop/preview/${data?.shop._id}`}>
+                  <Link to={`/shop/preview/${data?.shop?._id}`}>
                     <img
                       src={`${data?.shop?.avatar?.url}`}
                       alt=""
@@ -218,9 +217,9 @@ const ProductDetails = ({ data }) => {
                     />
                   </Link>
                   <div className="pr-8">
-                    <Link to={`/shop/preview/${data?.shop._id}`}>
+                    <Link to={`/shop/preview/${data?.shop?._id}`}>
                       <h3 className={`${styles.shop_name} pb-1 pt-1`}>
-                        {data.shop.name}
+                        {data?.shop?.name}
                       </h3>
                     </Link>
                     <h5 className="pb-3 text-[15px]">
@@ -343,7 +342,7 @@ const ProductDetailsInfo = ({
       {active === 3 && (
         <div className="w-full block md:flex p-5">
           <div className="w-full md:w-[50%]">
-            <Link to={`/shop/preview/${data.shop._id}`}>
+            <Link to={`/shop/preview/${data.shop?._id}`}>
               <div className="flex items-center">
                 <img
                   src={`${data?.shop?.avatar?.url}`}
@@ -351,14 +350,14 @@ const ProductDetailsInfo = ({
                   alt=""
                 />
                 <div className="pl-3">
-                  <h3 className={`${styles.shop_name}`}>{data.shop.name}</h3>
+                  <h3 className={`${styles.shop_name}`}>{data.shop?.name}</h3>
                   <h5 className="pb-2 text-[15px]">
                     ({averageRating}/5) Ratings
                   </h5>
                 </div>
               </div>
             </Link>
-            <p className="pt-2">{data.shop.description}</p>
+            <p className="pt-2">{data.shop?.description}</p>
           </div>
           <div className="w-full md:w-[50%] mt-5 md:mt-0 md:flex flex-col items-end">
             <div className="text-left">
