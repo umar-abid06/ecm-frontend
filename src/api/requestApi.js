@@ -1,5 +1,6 @@
 // src/api/requestApi.js
 import apiClient from "./apiClient";
+import axios from "axios";
 
 export async function requestApi(url, method, data = {}, config = {}) {
   const response = await apiClient[method](url, data, config);

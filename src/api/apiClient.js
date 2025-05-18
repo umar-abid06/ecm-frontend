@@ -1,5 +1,6 @@
 // src/api/apiClient.js
 import { create } from "apisauce";
+import axios from "axios";
 import { getItem, setItem, clearAllData } from "../utils/storageService";
 import { ENDPOINTS } from "./endpoints";
 import { queryClient } from "../context/ApiClientProvider"; // Importing React Query client for state management
