@@ -5,7 +5,7 @@ import { PATHS } from "../utils/paths";
 export const AuthGuard = ({ children }) => {
   const { isAuth } = useStore(); // Access authentication state using the custom hook
   // const isAuth = true;
-  console.log(isAuth);
+  // console.log(isAuth);
   return isAuth ? children : <Navigate to={PATHS.AUTH.LOGIN} />; // Redirect to login if not authenticated
 };
 export const GuestGuard = ({ children }) => {
