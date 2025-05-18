@@ -14,7 +14,7 @@ function App() {
     <ApiClientProvider>
       {loading && <LoadingComponent />}
       {/* Show LoadingComponent if loading */}
-      <Router>
+      <Router basename="/">
         <AppRoutes />
       </Router>
       <ToastContainer
