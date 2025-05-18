@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import ShopLogin from "../components/Shop/ShopLogin";
+import ShopLogin from "../components/shop/ShopLogin";
 import { useStore } from "../store";
 
 const ShopLoginPage = () => {
