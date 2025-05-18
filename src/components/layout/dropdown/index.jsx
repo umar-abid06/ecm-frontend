@@ -9,7 +9,7 @@ const DropDown = ({ setDropDown }) => {
   const submitHandle = (i) => {
     navigate(`${PATHS.APP.PRODUCTS}?category=${i.title}`);
     setDropDown(false);
-    window.location.reload();
+    // window.location.reload();
   };
 
   return (

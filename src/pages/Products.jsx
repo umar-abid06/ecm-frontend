@@ -26,7 +26,7 @@ const Products = () => {
     }
 
     window.scrollTo(0, 0);
-  }, [allProducts]);
+  }, [allProducts, categoryData]);
 
   return (
     <>
