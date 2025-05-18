@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import styles from "../../styles/styles";
 import { BsFillBagFill } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { server } from "../../server";
-import axios from "axios";
 import { toast } from "react-toastify";
 
 const OrderDetails = () => {
@@ -22,41 +20,28 @@ const OrderDetails = () => {
   const data = orders && orders?.find((item) => item._id === id);
 
   const orderUpdateHandler = async (e) => {
-    await axios
-      .put(
-        `${server}/order/update-order-status/${id}`,
-        {
-          status,
-        },
-        { withCredentials: true }
-      )
-      .then((res) => {
-        toast.success("Order updated!");
-        navigate("/dashboard-orders");
-      })
-      .catch((error) => {
-        toast.error(error.response.data.message);
-      });
+    alert("SUCCESS");
   };
 
   const refundOrderUpdateHandler = async (e) => {
-    await axios
-      .put(
-        `${server}/order/order-refund-success/${id}`,
-        {
-          status,
-        },
-        { withCredentials: true }
-      )
-      .then((res) => {
-        toast.success("Order updated!");
-      })
-      .catch((error) => {
-        toast.error(error.response.data.message);
-      });
+    alert("Refunded");
+    // await axios
+    //   .put(
+    //     `${server}/order/order-refund-success/${id}`,
+    //     {
+    //       status,
+    //     },
+    //     { withCredentials: true }
+    //   )
+    //   .then((res) => {
+    //     toast.success("Order updated!");
+    //   })
+    //   .catch((error) => {
+    //     toast.error(error.response.data.message);
+    //   });
   };
 
-  console.log(data?.status);
+  // console.log(data?.status);
 
   return (
     <div className={`py-4 min-h-screen ${styles.section}`}>
