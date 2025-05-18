@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { categoriesData } from "../../static/data";
 import { toast } from "react-toastify";
-import { createevent } from "../../redux/actions/event";
+import { useStore } from "../../store";
 
 const CreateEvent = () => {
-  const { seller } = useSelector((state) => state.seller);
-  const { success, error } = useSelector((state) => state.events);
+  const { seller } = useStore();
+
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const success = true;
+  const error = false;
 
   const [images, setImages] = useState([]);
   const [name, setName] = useState("");
