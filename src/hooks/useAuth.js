@@ -26,6 +26,7 @@ const useAuth = () => {
       setEmailCheckMsg(response?.data?.message);
     },
     onError: (error) => {
+      // toast.error(`${error?.message}`);
       console.error("Registration error:", error);
     },
   });

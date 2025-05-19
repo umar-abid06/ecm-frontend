@@ -11,7 +11,7 @@ export async function requestApi(url, method, data = {}, config = {}) {
   };
 
   if (!response.ok) {
-    throw responseData;
+    return responseData;
   }
 
   return responseData;

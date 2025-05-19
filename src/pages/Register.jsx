@@ -14,12 +14,12 @@ const Register = () => {
   const handleRegisterSubmit = async (data) => {
     try {
       const response = await register(data);
-
+      console.log(response, "REGISTER");
       if (response.status === 200) {
         toast.success(response?.data?.message);
         navigate(PATHS.AUTH.LOGIN);
       } else {
-        toast.error(`${response?.data.message}
+        toast.error(`${response?.message}
     `);
       }
     } catch (err) {
